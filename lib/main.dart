@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset('assets/dino.json', controller: _controller,
               onLoaded: (composition) {
