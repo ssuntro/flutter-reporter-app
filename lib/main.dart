@@ -98,24 +98,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       ),
     );
 
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(widget.title),
-    //   ),
-    //   body: Center(
-    //     // Center is a layout widget. It takes a single child and positions it
-    //     // in the middle of the parent.
-    //     child: Column(
-    //       //vertically, mainAxisAlignment to center the children vertically, the cross axis would be horizontal
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: <Widget>[],
-    //     ),
-    //   ),
-    //   // floatingActionButton: FloatingActionButton(
-    //   //   onPressed: () {},
-    //   //   tooltip: 'Increment',
-    //   //   child: Icon(Icons.add),
-    //   // ),
     // floatingActionButton: FloatingActionButton(
     //   onPressed: () {},
     //   tooltip: 'Increment',
