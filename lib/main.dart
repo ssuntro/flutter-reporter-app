@@ -83,14 +83,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             );
 
             Future.delayed(const Duration(milliseconds: 5000), () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (ctx) => MainNewsScreen(),
-                ),
-              );
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => MainNewsScreen()));
             });
           }),
+          // const SizedBox(height: 30),
+          // ElevatedButton(
+          //   onPressed: () {},
+          //   child: const Text('Button ja'),
+          // ),
         ],
       ),
     );
@@ -113,6 +116,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     //   //   tooltip: 'Increment',
     //   //   child: Icon(Icons.add),
     //   // ),
+    // floatingActionButton: FloatingActionButton(
+    //   onPressed: () {},
+    //   tooltip: 'Increment',
+    //   child: Icon(Icons.add),
+    // ),
     // );
   }
 }
