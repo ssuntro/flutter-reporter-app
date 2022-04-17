@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:news_app/main_news_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -66,8 +67,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       body: Column(
         children: [
-          Lottie.network(
-              'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
           Lottie.asset('assets/dino.json', controller: _controller,
               onLoaded: (composition) {
             setState(() {
@@ -82,6 +81,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               reverse: true,
               period: _controller.duration * (stop - start),
             );
+
+            Future.delayed(const Duration(milliseconds: 5000), () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (ctx) => MainNewsScreen(),
+                ),
+              );
+            });
           }),
         ],
       ),
