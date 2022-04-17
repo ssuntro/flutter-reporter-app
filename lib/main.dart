@@ -64,23 +64,47 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: Column(
+        children: [
+          Lottie.network(
+              'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+          Lottie.asset('assets/dino.json', controller: _controller,
+              onLoaded: (composition) {
+            setState(() {
+              _controller..duration = composition.duration;
+              // ..forward();
+            });
+            var start = 0.1;
+            var stop = 0.5;
+            _controller.repeat(
+              min: start,
+              max: stop,
+              reverse: true,
+              period: _controller.duration * (stop - start),
+            );
+          }),
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          //vertically, mainAxisAlignment to center the children vertically, the cross axis would be horizontal
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
-        ),
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
+
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(widget.title),
+    //   ),
+    //   body: Center(
+    //     // Center is a layout widget. It takes a single child and positions it
+    //     // in the middle of the parent.
+    //     child: Column(
+    //       //vertically, mainAxisAlignment to center the children vertically, the cross axis would be horizontal
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: <Widget>[],
+    //     ),
+    //   ),
+    //   // floatingActionButton: FloatingActionButton(
+    //   //   onPressed: () {},
+    //   //   tooltip: 'Increment',
+    //   //   child: Icon(Icons.add),
+    //   // ),
+    // );
   }
 }
