@@ -49,11 +49,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   AnimationController _controller;
-
+  var showButton = true;
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => MainNewsScreen()));
+    });
   }
 
   @override
@@ -62,39 +68,46 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  Widget buildButton() {
+    print("#1 - buildButton");
+    return showButton
+        ? ElevatedButton(
+            onPressed: () {},
+            child: const Text('Button ja'),
+          )
+        : Container(
+            // ~invisible view - to group things, can see if set bgColor
+
+            color: Colors.amber,
+            height: 10,
+            width: 10,
+          );
+  }
+
+  Widget buildLottie() {
+    print("#1 - buildLottie ${showButton}");
+    return Lottie.asset('assets/dino.json', controller: _controller,
+        onLoaded: (composition) {
+      setState(() {
+        print("#1 - setState been called");
+        _controller..duration = composition.duration;
+        showButton = !showButton;
+        // ..forward();
+      });
+      print("#1 - call future");
+      // Future.delayed(const Duration(milliseconds: 5000), () {});
+      _controller.repeat();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset('assets/dino.json', controller: _controller,
-              onLoaded: (composition) {
-            setState(() {
-              _controller..duration = composition.duration;
-              // ..forward();
-            });
-            var start = 0.1;
-            var stop = 0.5;
-            _controller.repeat(
-              min: start,
-              max: stop,
-              reverse: true,
-              period: _controller.duration * (stop - start),
-            );
-
-            Future.delayed(const Duration(milliseconds: 5000), () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => MainNewsScreen()));
-            });
-          }),
-          // const SizedBox(height: 30),
-          // ElevatedButton(
-          //   onPressed: () {},
-          //   child: const Text('Button ja'),
-          // ),
+          buildLottie(),
+          buildButton(),
         ],
       ),
     );
