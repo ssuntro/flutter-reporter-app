@@ -47,8 +47,6 @@ extension NewsStatusExtension on NewsStatus {
 // String catName = cat.name;
 // cat.talk();
 
-enum Fruit { apple, banana }
-
 
 // String str = Fruit.banana.toString();
 // Fruit f = Fruit.values.firstWhere((e) => e.toString() == str);

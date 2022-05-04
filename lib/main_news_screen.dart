@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lottie/lottie.dart';
+import 'package:news_app/news_category.dart';
 import 'package:news_app/news_status.dart';
 
 class MainNewsScreen extends StatelessWidget {
@@ -8,13 +9,25 @@ class MainNewsScreen extends StatelessWidget {
   // NewsStatus.values.firstWhere((e) => e.rawValue == "pending response");
 
   final newsList = [
-    {"title": "22", "status": NewsStatus.responded, "category": "animal"},
-    {"title": "222", "status": NewsStatus.closed, "category": "globalWarming"},
-    {"title": "333", "status": NewsStatus.closed, "category": "globalWarming"},
+    {
+      "title": "22",
+      "status": NewsStatus.responded,
+      "category": NewsCategory.animal
+    },
+    {
+      "title": "222",
+      "status": NewsStatus.closed,
+      "category": NewsCategory.globalWarming
+    },
+    {
+      "title": "333",
+      "status": NewsStatus.closed,
+      "category": NewsCategory.globalWarming
+    },
     {
       "title": "444",
       "status": NewsStatus.pendingResponse,
-      "category": "finance"
+      "category": NewsCategory.finance
     },
   ];
   @override
@@ -65,8 +78,13 @@ class MainNewsScreen extends StatelessWidget {
                     onPressed: () {},
                     child: Row(
                       children: [
-                        Image.network(
-                            "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg"),
+                        Image.asset(
+                            (newsList[index]["category"] is NewsCategory)
+                                ? (newsList[index]["category"] as NewsCategory)
+                                    .imagepath
+                                : null),
+                        // Image.network(
+                        //     "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg"),
                         Container(
                           width: 10,
                         ),
