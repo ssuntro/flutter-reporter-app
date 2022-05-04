@@ -34,8 +34,45 @@ class MainNewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // return Container();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("News list"),
+        appBar:
+            // AppBar( back button style
+            //   automaticallyImplyLeading: false,
+            //   title: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: <Widget>[
+            //       SizedBox(
+            //         height: 20, // Your Height
+            //         width: 20, // Your width
+            //         child: Text("ddddd"),
+            //       ),
+            //       // Your widgets here
+            //     ],
+            //   ),
+            // ),
+            AppBar(
+          // automaticallyImplyLeading: false,
+          // leadingWidth: 400,
+          // titleSpacing: 0,
+          leading: ElevatedButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+
+          actions: [
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Reorder"),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Refresh"),
+                )
+              ],
+            ),
+          ],
         ),
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
@@ -224,8 +261,8 @@ class MainNewsScreen extends StatelessWidget {
 }
 
 // present popup == Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     fullscreenDialog: true,
-              //     builder: (ctx) => MainNewsScreen(),
-              //   ),
-              // );
+//   MaterialPageRoute(
+//     fullscreenDialog: true,
+//     builder: (ctx) => MainNewsScreen(),
+//   ),
+// );
