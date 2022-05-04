@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lottie/lottie.dart';
+import 'package:news_app/news_status.dart';
 
 class MainNewsScreen extends StatelessWidget {
+  // NewsStatus a =
+  // NewsStatus.values.firstWhere((e) => e.rawValue == "pending response");
+
+  final newsList = [
+    {"title": "22", "status": NewsStatus.responded, "category": "animal"},
+    {"title": "222", "status": NewsStatus.closed, "category": "globalWarming"},
+    {"title": "333", "status": NewsStatus.closed, "category": "globalWarming"},
+    {
+      "title": "444",
+      "status": NewsStatus.pendingResponse,
+      "category": "finance"
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     // return Container();
@@ -38,7 +52,7 @@ class MainNewsScreen extends StatelessWidget {
           // ),
 
           child: ListView.builder(
-              itemCount: 10,
+              itemCount: newsList.length,
               itemBuilder: (ctx, index) => Container(
                   padding: EdgeInsets.all(0),
                   height: 100,
@@ -61,7 +75,9 @@ class MainNewsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "AA",
+                              (newsList[index]["title"] is String)
+                                  ? (newsList[index]["title"])
+                                  : "",
                               textAlign: TextAlign.left,
                               // style: TextStyle(backgroundColor: Colors.red),
                             ),
@@ -70,13 +86,26 @@ class MainNewsScreen extends StatelessWidget {
                               child: IgnorePointer(
                                 ignoring: true,
                                 child: ElevatedButton(
-                                    child: Text("Animal"),
+                                    child: Text((newsList[index]["status"]
+                                            is NewsStatus)
+                                        ? (newsList[index]["status"]
+                                                as NewsStatus)
+                                            .rawValue
+                                        : ""),
                                     onPressed: () {},
                                     style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(255, 181, 231,
-                                          244), //Color.fromARGB(255, 198, 126, 210),
-                                      onPrimary: Color.fromARGB(255, 20, 133,
-                                          161), //Color.fromARGB(255, 108, 8, 125),
+                                      primary: (newsList[index]["status"]
+                                              is NewsStatus)
+                                          ? (newsList[index]["status"]
+                                                  as NewsStatus)
+                                              .primaryColor
+                                          : null, //Color.fromARGB(255, 198, 126, 210),
+                                      onPrimary: (newsList[index]["status"]
+                                              is NewsStatus)
+                                          ? (newsList[index]["status"]
+                                                  as NewsStatus)
+                                              .secondaryColor
+                                          : null, //Color.fromARGB(255, 108, 8, 125),
                                     )),
                               ),
                             )
