@@ -63,17 +63,20 @@ class MainNewsScreen extends StatelessWidget {
                             Text(
                               "AA",
                               textAlign: TextAlign.left,
-                              style: TextStyle(backgroundColor: Colors.red),
+                              // style: TextStyle(backgroundColor: Colors.red),
                             ),
-                            ElevatedButton(
-                                child: Text("Animal"),
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
+                            SizedBox(
+                              height: 25,
+                              child: ElevatedButton(
+                                  child: Text("Animal"),
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(255, 181, 231,
                                         244), //Color.fromARGB(255, 198, 126, 210),
                                     onPrimary: Color.fromARGB(255, 20, 133,
-                                        161) //Color.fromARGB(255, 108, 8, 125),
-                                    )),
+                                        161), //Color.fromARGB(255, 108, 8, 125),
+                                  )),
+                            ),
                             // TextButton(
                             //     child: Text("Add to cart".toUpperCase(),
                             //         style: TextStyle(fontSize: 14)),
