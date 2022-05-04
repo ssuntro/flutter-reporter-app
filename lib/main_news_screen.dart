@@ -51,14 +51,10 @@ class MainNewsScreen extends StatelessWidget {
             //   ),
             // ),
             AppBar(
-          // automaticallyImplyLeading: false,
-          // leadingWidth: 400,
-          // titleSpacing: 0,
           leading: ElevatedButton(
             onPressed: () {},
             child: Icon(Icons.add),
           ),
-
           actions: [
             Row(
               children: [
@@ -111,6 +107,7 @@ class MainNewsScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         primary: Colors.white,
                         onPrimary: Colors.black,
+                        shadowColor: Colors.transparent,
                         padding: EdgeInsets.all(0)),
                     onPressed: () {},
                     child: Row(
@@ -186,44 +183,7 @@ class MainNewsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
-
-                  // child: ListTile(
-                  //   // dense: true,
-                  //   minVerticalPadding: 0,
-                  //   contentPadding: EdgeInsets.all(0),
-                  //   // minLeadingWidth: 100,
-                  //   leading: Expanded(
-                  //     child: Container(
-                  //       color: Colors.black,
-                  //     ),
-                  //   ),
-                  //   // leading: Image.network(
-                  //   //   "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
-                  //   //   fit: BoxFit.cover, height: 100,
-                  //   //   width: 100,
-                  //   //   // width: 200,
-                  //   // ),
-                  //   title: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text("A"),
-                  //         ElevatedButton(
-                  //           child: Text("Animal"),
-                  //           onPressed: () {},
-                  //           style: ElevatedButton.styleFrom(
-                  //             primary: Color.fromARGB(255, 198, 126, 210),
-                  //             onPrimary: Color.fromARGB(255, 108, 8, 125),
-                  //             textStyle: TextStyle(
-                  //                 fontSize: 15,
-                  //                 fontWeight: FontWeight.normal),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly),
-                  //   onTap: () {},
-                  // ),
-                  )),
+                  ))),
 
           // child: ListView.builder(
           //   itemCount: 10,
@@ -266,3 +226,41 @@ class MainNewsScreen extends StatelessWidget {
 //     builder: (ctx) => MainNewsScreen(),
 //   ),
 // );
+
+
+
+// child: ListTile(
+//   // dense: true,
+//   minVerticalPadding: 0,
+//   contentPadding: EdgeInsets.all(0),
+//   // minLeadingWidth: 100,
+//   leading: Expanded(
+//     child: Container(
+//       color: Colors.black,
+//     ),
+//   ),
+//   // leading: Image.network(
+//   //   "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+//   //   fit: BoxFit.cover, height: 100,
+//   //   width: 100,
+//   //   // width: 200,
+//   // ),
+//   title: Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text("A"),
+//         ElevatedButton(
+//           child: Text("Animal"),
+//           onPressed: () {},
+//           style: ElevatedButton.styleFrom(
+//             primary: Color.fromARGB(255, 198, 126, 210),
+//             onPrimary: Color.fromARGB(255, 108, 8, 125),
+//             textStyle: TextStyle(
+//                 fontSize: 15,
+//                 fontWeight: FontWeight.normal),
+//           ),
+//         ),
+//       ],
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly),
+//   onTap: () {},
+// ),
