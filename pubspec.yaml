@@ -49,6 +49,7 @@ flutter:
     - assets/images/animal.jpeg
     - assets/images/finance.jpeg
     - assets/images/global_warming.jpeg
+    - assets/images/default.png
     - assets/dino.json
   #   - images/a_dot_ham.jpeg
 

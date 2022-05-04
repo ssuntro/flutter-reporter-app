@@ -82,7 +82,7 @@ class MainNewsScreen extends StatelessWidget {
                             (newsList[index]["category"] is NewsCategory)
                                 ? (newsList[index]["category"] as NewsCategory)
                                     .imagepath
-                                : null),
+                                : "assets/images/default.png"),
                         // Image.network(
                         //     "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg"),
                         Container(
