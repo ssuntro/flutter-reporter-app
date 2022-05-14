@@ -3,23 +3,23 @@ import 'package:lottie/lottie.dart';
 
 import 'main_news_screen.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key) {
+class SplashPage extends StatefulWidget {
+  SplashPage({Key key, this.title}) : super(key: key) {
     // print("MyHomePage - init");
   }
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _SplashPageState createState() => _SplashPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  _MyHomePageState() {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+  _SplashPageState() {
     // print("_MyHomePageState - init");
   }
   @override
-  void didUpdateWidget(MyHomePage oldWidget) {
+  void didUpdateWidget(SplashPage oldWidget) {
     // print("_MyHomePageState - didUpdateWidget");
     super.didUpdateWidget(oldWidget);
   }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:news_app/main_news_screen.dart';
-
-import 'my_home_page.dart';
+import 'package:news_app/splash_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'News App'),
+      home: SplashPage(title: 'News App'),
     );
   }
 }
