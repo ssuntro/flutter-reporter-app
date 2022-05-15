@@ -30,6 +30,9 @@ class MainNewsScreen extends StatelessWidget {
       // "category": NewsCategory.finance
     },
   ];
+
+  var allowReorder = false;
+
   onReoder(oldIndex, newIndex) {
     if (oldIndex < newIndex) {
       // removing the item at oldIndex will shorten the list by 1.
@@ -41,7 +44,6 @@ class MainNewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container();
     return Scaffold(
         appBar:
             // AppBar( back button style
@@ -68,7 +70,9 @@ class MainNewsScreen extends StatelessWidget {
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    allowReorder = !allowReorder;
+                  },
                   child: Text("Reorder"),
                 ),
                 ElevatedButton(
@@ -119,6 +123,20 @@ class MainNewsScreen extends StatelessWidget {
                   final category = (newsList[index]["category"] is NewsCategory)
                       ? (newsList[index]["category"] as NewsCategory)
                       : null;
+                  return allowReorder
+                      ? NewsRecord(
+                          key: Key(title),
+                          title: title,
+                          status: status,
+                          category: category)
+                      : IgnorePointer(
+                          key: Key(title),
+                          child: NewsRecord(
+                              key: Key(title),
+                              title: title,
+                              status: status,
+                              category: category),
+                        );
                 }
 
                 // child: ListView.builder(
