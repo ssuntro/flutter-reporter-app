@@ -30,6 +30,15 @@ class MainNewsScreen extends StatelessWidget {
       // "category": NewsCategory.finance
     },
   ];
+  onReoder(oldIndex, newIndex) {
+    if (oldIndex < newIndex) {
+      // removing the item at oldIndex will shorten the list by 1.
+      newIndex -= 1;
+    }
+    final Map<String, Object> element = newsList.removeAt(oldIndex);
+    newsList.insert(newIndex, element);
+  }
+
   @override
   Widget build(BuildContext context) {
     // return Container();
@@ -98,29 +107,18 @@ class MainNewsScreen extends StatelessWidget {
             // ),
 
             child: ReorderableListView.builder(
-                onReorder: ((oldIndex, newIndex) {
-                  if (oldIndex < newIndex) {
-                    // removing the item at oldIndex will shorten the list by 1.
-                    newIndex -= 1;
-                  }
-                  final Map<String, Object> element =
-                      newsList.removeAt(oldIndex);
-                  newsList.insert(newIndex, element);
-                }),
+                onReorder: onReoder,
                 itemCount: newsList.length,
                 itemBuilder: (ctx, index) {
-                  final title = ((newsList[index]["title"] is String)
+                  final title = (newsList[index]["title"] is String)
                       ? (newsList[index]["title"])
-                      : "");
-                  return NewsRecord(
-                      key: Key(title),
-                      title: title,
-                      status: ((newsList[index]["status"] is NewsStatus)
-                          ? (newsList[index]["status"] as NewsStatus)
-                          : null),
-                      category: (newsList[index]["category"] is NewsCategory)
-                          ? (newsList[index]["category"] as NewsCategory)
-                          : null);
+                      : "";
+                  final status = (newsList[index]["status"] is NewsStatus)
+                      ? (newsList[index]["status"] as NewsStatus)
+                      : null;
+                  final category = (newsList[index]["category"] is NewsCategory)
+                      ? (newsList[index]["category"] as NewsCategory)
+                      : null;
                 }
 
                 // child: ListView.builder(
