@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'a_stateful_widget.dart';
+import 'a_stateless_widget.dart';
+import 'main_news_screen.dart';
+
 class SplashPage extends StatefulWidget {
   SplashPage({Key key, this.title}) : super(key: key) {
     print("SplashPage - init widget");
@@ -89,6 +93,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         children: [
           buildLottie(),
           buildButton(),
+          AStatelessWidget(
+            parsedString: DateTime.now().toString(),
+          ),
+          AStatefulWidget(
+            parsedString: DateTime.now().toString(),
+          ),
         ],
       ),
     );
