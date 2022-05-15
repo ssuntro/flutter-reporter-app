@@ -3,10 +3,13 @@ import 'package:news_app/news_category.dart';
 import 'package:news_app/news_record.dart';
 import 'package:news_app/news_status.dart';
 
-class MainNewsScreen extends StatelessWidget {
-  // NewsStatus a =
-  // NewsStatus.values.firstWhere((e) => e.rawValue == "pending response");
+class MainNewsScreen extends StatefulWidget {
+  @override
+  State<MainNewsScreen> createState() => _MainNewsScreenState();
+}
 
+class _MainNewsScreenState extends State<MainNewsScreen> {
+  // NewsStatus a =
   final newsList = [
     {
       "title": "11",
@@ -71,7 +74,9 @@ class MainNewsScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    allowReorder = !allowReorder;
+                    setState(() {
+                      allowReorder = !allowReorder;
+                    });
                   },
                   child: Text("Reorder"),
                 ),
