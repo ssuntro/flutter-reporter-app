@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'main_news_screen.dart';
-
 class SplashPage extends StatefulWidget {
   SplashPage({Key key, this.title}) : super(key: key) {
-    // print("MyHomePage - init");
+    print("SplashPage - init widget");
   }
 
   final String title;
@@ -16,11 +14,11 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   _SplashPageState() {
-    // print("_MyHomePageState - init");
+    print("_SplashPageState - construct");
   }
   @override
   void didUpdateWidget(SplashPage oldWidget) {
-    // print("_MyHomePageState - didUpdateWidget");
+    print("_SplashPageState - didUpdateWidget");
     super.didUpdateWidget(oldWidget);
   }
 
@@ -33,10 +31,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
 //////
   AnimationController _controller;
-  var showButton = true;
+  var showButton = false;
   @override
   void initState() {
-    // print("_MyHomePageState - initState");
+    print("_SplashPageState - initState");
     super.initState();
     _controller = AnimationController(vsync: this);
     Future.delayed(const Duration(milliseconds: 5000), () {
@@ -47,39 +45,37 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
-  String ann;
   Widget buildButton() {
-    print("#1 - buildButton");
+    print("buildButton has been called");
     return showButton
-        ? Container(
+        ? ElevatedButton(
+            onPressed: () {
+              setState(() {
+                // print("setState when button did click");
+              });
+            },
+            child: const Text('Button ja'),
+          )
+        : Container(
             // ~invisible view - to group things, can see if set bgColor
 
             color: Colors.amber,
             height: 10,
             width: 10,
-          )
-        : ElevatedButton(
-            onPressed: () {
-              setState(() {
-                print("#2 - setState been called");
-                ann = "";
-              });
-            },
-            child: const Text('Button ja'),
           );
   }
 
   Widget buildLottie() {
-    print("#1 - buildLottie ${showButton}");
+    print("buildLottie has been called");
     return Lottie.asset('assets/dino.json', controller: _controller,
         onLoaded: (composition) {
       setState(() {
-        print("#1 - setState been called");
+        print("setState when Lottie did load");
         _controller..duration = composition.duration;
         showButton = !showButton;
         // ..forward();
       });
-      print("#1 - call future");
+      print("Lottie did load");
       // Future.delayed(const Duration(milliseconds: 5000), () {});
       _controller.repeat();
     });
