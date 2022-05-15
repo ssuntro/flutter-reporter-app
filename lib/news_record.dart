@@ -9,7 +9,12 @@ class NewsRecord extends StatelessWidget {
   final NewsStatus status;
 
   NewsRecord(
-      {@required this.category, @required this.title, @required this.status});
+      {@required this.category,
+      @required this.title,
+      @required this.status,
+      Key key})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

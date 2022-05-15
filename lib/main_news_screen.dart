@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:lottie/lottie.dart';
 import 'package:news_app/news_category.dart';
 import 'package:news_app/news_record.dart';
 import 'package:news_app/news_status.dart';
@@ -11,17 +9,17 @@ class MainNewsScreen extends StatelessWidget {
 
   final newsList = [
     {
-      "title": "22",
+      "title": "11",
       "status": NewsStatus.responded,
       "category": NewsCategory.animal
     },
     {
-      "title": "222",
+      "title": "22",
       "status": NewsStatus.closed,
       "category": NewsCategory.globalWarming
     },
     {
-      "title": "333",
+      "title": "33",
       "status": NewsStatus.closed,
       "category": NewsCategory.globalWarming
     },
@@ -99,51 +97,64 @@ class MainNewsScreen extends StatelessWidget {
             //   ),
             // ),
 
-            child: ListView.builder(
-          itemCount: newsList.length,
-          itemBuilder: (ctx, index) => NewsRecord(
-              title: ((newsList[index]["title"] is String)
-                  ? (newsList[index]["title"])
-                  : ""),
-              status: ((newsList[index]["status"] is NewsStatus)
-                  ? (newsList[index]["status"] as NewsStatus)
-                  : null),
-              category: (newsList[index]["category"] is NewsCategory)
-                  ? (newsList[index]["category"] as NewsCategory)
-                  : null),
+            child: ReorderableListView.builder(
+                onReorder: ((oldIndex, newIndex) {
+                  if (oldIndex < newIndex) {
+                    // removing the item at oldIndex will shorten the list by 1.
+                    newIndex -= 1;
+                  }
+                  final Map<String, Object> element =
+                      newsList.removeAt(oldIndex);
+                  newsList.insert(newIndex, element);
+                }),
+                itemCount: newsList.length,
+                itemBuilder: (ctx, index) {
+                  final title = ((newsList[index]["title"] is String)
+                      ? (newsList[index]["title"])
+                      : "");
+                  return NewsRecord(
+                      key: Key(title),
+                      title: title,
+                      status: ((newsList[index]["status"] is NewsStatus)
+                          ? (newsList[index]["status"] as NewsStatus)
+                          : null),
+                      category: (newsList[index]["category"] is NewsCategory)
+                          ? (newsList[index]["category"] as NewsCategory)
+                          : null);
+                }
 
-          // child: ListView.builder(
-          //   itemCount: 10,
-          //   itemBuilder: (ctx, index) => Container(
-          //     child: Text(
-          //       "${index + 1}",
-          //       style: TextStyle(fontSize: 150),
-          //     ),
-          //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
-          //     height: 100,
-          //     width: 10,
-          //   ),
-          // ),
+                // child: ListView.builder(
+                //   itemCount: 10,
+                //   itemBuilder: (ctx, index) => Container(
+                //     child: Text(
+                //       "${index + 1}",
+                //       style: TextStyle(fontSize: 150),
+                //     ),
+                //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
+                //     height: 100,
+                //     width: 10,
+                //   ),
+                // ),
 
-          // child: ListView(
-          //   children: <Widget>[
-          //     ...new List<int>.generate(10, (i) => i + 1)
-          //         .map(
-          //           (number) => Container(
-          //             child: Text(
-          //               "${number}",
-          //               style: TextStyle(fontSize: 150),
-          //             ),
-          //             color:
-          //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
-          //             height: 100,
-          //             width: 10,
-          //           ),
-          //         )
-          //         .toList()
-          //   ],
-          // ),
-        )));
+                // child: ListView(
+                //   children: <Widget>[
+                //     ...new List<int>.generate(10, (i) => i + 1)
+                //         .map(
+                //           (number) => Container(
+                //             child: Text(
+                //               "${number}",
+                //               style: TextStyle(fontSize: 150),
+                //             ),
+                //             color:
+                //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
+                //             height: 100,
+                //             width: 10,
+                //           ),
+                //         )
+                //         .toList()
+                //   ],
+                // ),
+                )));
   }
 }
 
