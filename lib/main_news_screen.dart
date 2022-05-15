@@ -25,7 +25,8 @@ class MainNewsScreen extends StatelessWidget {
       "category": NewsCategory.globalWarming
     },
     {
-      "title": "444",
+      "title":
+          "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
       "status": NewsStatus.pendingResponse,
       "category": NewsCategory.finance
     },
@@ -122,65 +123,70 @@ class MainNewsScreen extends StatelessWidget {
                         Container(
                           width: 10,
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              (newsList[index]["title"] is String)
-                                  ? (newsList[index]["title"])
-                                  : "",
-                              textAlign: TextAlign.left,
-                              // style: TextStyle(backgroundColor: Colors.red),
-                            ),
-                            SizedBox(
-                              height: 25,
-                              child: IgnorePointer(
-                                ignoring: true,
-                                child: ElevatedButton(
-                                    child: Text((newsList[index]["status"]
-                                            is NewsStatus)
-                                        ? (newsList[index]["status"]
-                                                as NewsStatus)
-                                            .rawValue
-                                        : ""),
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      primary: (newsList[index]["status"]
-                                              is NewsStatus)
-                                          ? (newsList[index]["status"]
-                                                  as NewsStatus)
-                                              .primaryColor
-                                          : null, //Color.fromARGB(255, 198, 126, 210),
-                                      onPrimary: (newsList[index]["status"]
-                                              is NewsStatus)
-                                          ? (newsList[index]["status"]
-                                                  as NewsStatus)
-                                              .secondaryColor
-                                          : null, //Color.fromARGB(255, 108, 8, 125),
-                                    )),
+                        Flexible(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                (newsList[index]["title"] is String)
+                                    ? (newsList[index]["title"])
+                                    : "",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                                // style: TextStyle(backgroundColor: Colors.red),
                               ),
-                            )
-                            // TextButton(
-                            //     child: Text("Add to cart".toUpperCase(),
-                            //         style: TextStyle(fontSize: 14)),
-                            //     style: ButtonStyle(
-                            //         padding:
-                            //             MaterialStateProperty.all<EdgeInsets>(
-                            //                 EdgeInsets.all(15)),
-                            //         foregroundColor:
-                            //             MaterialStateProperty.all<Color>(
-                            //                 Colors.red),
-                            //         shape: MaterialStateProperty.all<
-                            //                 RoundedRectangleBorder>(
-                            //             RoundedRectangleBorder(
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(18.0),
-                            //                 side: BorderSide(
-                            //                     color: Colors.red)))),
-                            //     onPressed: () => null),
-                          ],
-                        ),
+
+                              SizedBox(
+                                height: 25,
+                                child: IgnorePointer(
+                                  ignoring: true,
+                                  child: ElevatedButton(
+                                      child: Text((newsList[index]["status"]
+                                              is NewsStatus)
+                                          ? (newsList[index]["status"]
+                                                  as NewsStatus)
+                                              .rawValue
+                                          : ""),
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        primary: (newsList[index]["status"]
+                                                is NewsStatus)
+                                            ? (newsList[index]["status"]
+                                                    as NewsStatus)
+                                                .primaryColor
+                                            : null, //Color.fromARGB(255, 198, 126, 210),
+                                        onPrimary: (newsList[index]["status"]
+                                                is NewsStatus)
+                                            ? (newsList[index]["status"]
+                                                    as NewsStatus)
+                                                .secondaryColor
+                                            : null, //Color.fromARGB(255, 108, 8, 125),
+                                      )),
+                                ),
+                              )
+                              // TextButton(
+                              //     child: Text("Add to cart".toUpperCase(),
+                              //         style: TextStyle(fontSize: 14)),
+                              //     style: ButtonStyle(
+                              //         padding:
+                              //             MaterialStateProperty.all<EdgeInsets>(
+                              //                 EdgeInsets.all(15)),
+                              //         foregroundColor:
+                              //             MaterialStateProperty.all<Color>(
+                              //                 Colors.red),
+                              //         shape: MaterialStateProperty.all<
+                              //                 RoundedRectangleBorder>(
+                              //             RoundedRectangleBorder(
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(18.0),
+                              //                 side: BorderSide(
+                              //                     color: Colors.red)))),
+                              //     onPressed: () => null),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ))),
