@@ -36,7 +36,7 @@ List<Map<String, Object>> stubData() {
 
 class _MainNewsPageState extends State<MainNewsPage> {
   var newsList = stubData();
-  var isAllowReorder = false;
+  var isReorderEnabled = false;
 
   onReoder(oldIndex, newIndex) {
     if (oldIndex < newIndex) {
@@ -83,7 +83,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      isAllowReorder = !isAllowReorder;
+                      isReorderEnabled = !isReorderEnabled;
                     });
                   },
                   child: Text("Reorder"),
@@ -136,7 +136,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                   final category = (newsList[index]["category"] is NewsCategory)
                       ? (newsList[index]["category"] as NewsCategory)
                       : null;
-                  return isAllowReorder
+                  return isReorderEnabled
                       ? NewsRecord(
                           key: Key(title),
                           title: title,
