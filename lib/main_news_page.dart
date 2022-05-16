@@ -4,7 +4,10 @@ import 'package:news_app/news_category.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
 
+import 'add_news_page.dart';
+
 class MainNewsPage extends StatefulWidget {
+  static const routeName = '/main-news-page';
   @override
   State<MainNewsPage> createState() => _MainNewsPageState();
 }
@@ -85,6 +88,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
             //     ],
             //   ),
             // ),
+
             AppBar(
           leading: ElevatedButton(
             onPressed: () {},
