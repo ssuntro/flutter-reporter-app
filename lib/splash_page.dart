@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 
 import 'a_stateful_widget.dart';
 import 'a_stateless_widget.dart';
-import 'main_news_screen.dart';
+import 'main_news_page.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key, this.title}) : super(key: key) {
