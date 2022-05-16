@@ -3,9 +3,9 @@ import 'package:news_app/news_category.dart';
 import 'package:news_app/news_record.dart';
 import 'package:news_app/news_status.dart';
 
-class MainNewsScreen extends StatefulWidget {
+class MainNewsPage extends StatefulWidget {
   @override
-  State<MainNewsScreen> createState() => _MainNewsScreenState();
+  State<MainNewsPage> createState() => _MainNewsPageState();
 }
 
 List<Map<String, Object>> stubData() {
@@ -34,7 +34,7 @@ List<Map<String, Object>> stubData() {
   ];
 }
 
-class _MainNewsScreenState extends State<MainNewsScreen> {
+class _MainNewsPageState extends State<MainNewsPage> {
   var newsList = stubData();
   var isAllowReorder = false;
 
