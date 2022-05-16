@@ -8,9 +8,8 @@ class MainNewsScreen extends StatefulWidget {
   State<MainNewsScreen> createState() => _MainNewsScreenState();
 }
 
-class _MainNewsScreenState extends State<MainNewsScreen> {
-  // NewsStatus a =
-  final newsList = [
+List<Map<String, Object>> stubData() {
+  return [
     {
       "title": "11",
       "status": NewsStatus.responded,
@@ -33,7 +32,10 @@ class _MainNewsScreenState extends State<MainNewsScreen> {
       // "category": NewsCategory.finance
     },
   ];
+}
 
+class _MainNewsScreenState extends State<MainNewsScreen> {
+  var newsList = stubData();
   var allowReorder = false;
 
   onReoder(oldIndex, newIndex) {
@@ -43,6 +45,12 @@ class _MainNewsScreenState extends State<MainNewsScreen> {
     }
     final Map<String, Object> element = newsList.removeAt(oldIndex);
     newsList.insert(newIndex, element);
+  }
+
+  onRefreshButtonDidClick() {
+    setState(() {
+      newsList = stubData();
+    });
   }
 
   @override
@@ -81,7 +89,7 @@ class _MainNewsScreenState extends State<MainNewsScreen> {
                   child: Text("Reorder"),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onRefreshButtonDidClick,
                   child: Text("Refresh"),
                 )
               ],
