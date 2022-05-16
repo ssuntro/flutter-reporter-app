@@ -36,7 +36,7 @@ List<Map<String, Object>> stubData() {
 
 class _MainNewsScreenState extends State<MainNewsScreen> {
   var newsList = stubData();
-  var allowReorder = false;
+  var isAllowReorder = false;
 
   onReoder(oldIndex, newIndex) {
     if (oldIndex < newIndex) {
@@ -83,7 +83,7 @@ class _MainNewsScreenState extends State<MainNewsScreen> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      allowReorder = !allowReorder;
+                      isAllowReorder = !isAllowReorder;
                     });
                   },
                   child: Text("Reorder"),
@@ -136,19 +136,22 @@ class _MainNewsScreenState extends State<MainNewsScreen> {
                   final category = (newsList[index]["category"] is NewsCategory)
                       ? (newsList[index]["category"] as NewsCategory)
                       : null;
-                  return allowReorder
+                  return isAllowReorder
                       ? NewsRecord(
                           key: Key(title),
                           title: title,
                           status: status,
-                          category: category)
+                          category: category,
+                          color: Colors.amber)
                       : IgnorePointer(
                           key: Key(title),
                           child: NewsRecord(
-                              key: Key(title),
-                              title: title,
-                              status: status,
-                              category: category),
+                            key: Key(title),
+                            title: title,
+                            status: status,
+                            category: category,
+                            color: Colors.white,
+                          ),
                         );
                 }
 

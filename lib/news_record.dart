@@ -7,11 +7,13 @@ class NewsRecord extends StatelessWidget {
   final NewsCategory category;
   final String title;
   final NewsStatus status;
+  final Color color;
 
   NewsRecord(
       {@required this.category,
       @required this.title,
       @required this.status,
+      @required this.color,
       Key key})
       : super(key: key);
 
@@ -23,7 +25,7 @@ class NewsRecord extends StatelessWidget {
         // color: index % 2 == 0 ? Colors.amber : Colors.blue,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              primary: color,
               onPrimary: Colors.black,
               shadowColor: Colors.transparent,
               padding: EdgeInsets.all(0)),
@@ -84,7 +86,8 @@ class NewsRecord extends StatelessWidget {
                     //     onPressed: () => null),
                   ],
                 ),
-              )
+              ),
+
             ],
           ),
         ));
