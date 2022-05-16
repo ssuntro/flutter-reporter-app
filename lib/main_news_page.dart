@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
@@ -8,30 +9,42 @@ class MainNewsPage extends StatefulWidget {
   State<MainNewsPage> createState() => _MainNewsPageState();
 }
 
-List<Map<String, Object>> stubData() {
+List<News> stubData() {
   return [
-    {
-      "title": "11",
-      "status": NewsStatus.responded,
-      "category": NewsCategory.animal,
-    },
-    {
-      "title": "22",
-      "status": NewsStatus.closed,
-      "category": NewsCategory.globalWarming
-    },
-    {
-      "title": "33",
-      "status": NewsStatus.closed,
-      "category": NewsCategory.globalWarming
-    },
-    {
-      "title":
-          "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
-      // "status": NewsStatus.pendingResponse,
-      // "category": NewsCategory.finance
-    },
+    News(
+        title: "11",
+        body: "body 11",
+        url: "https://emojipedia.org/party-popper/",
+        status: NewsStatus.responded,
+        category: NewsCategory.animal),
+    News(
+        title: "22",
+        body: "body 22",
+        url: "google.com",
+        status: NewsStatus.closed,
+        category: NewsCategory.globalWarming),
+    News(
+        title: "33",
+        body: "body 33",
+        url: "",
+        status: NewsStatus.closed,
+        category: NewsCategory.globalWarming),
+    News(
+        title:
+            "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
+        body: "body 44",
+        url: null,
+        status: NewsStatus.pendingResponse,
+        category: NewsCategory.finance)
   ];
+  // [
+  //   {
+  //     "title":
+  //         "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
+  //     // "status": NewsStatus.pendingResponse,
+  //     // "category": NewsCategory.finance
+  //   },
+  // ];
 }
 
 class _MainNewsPageState extends State<MainNewsPage> {
@@ -43,7 +56,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
       // removing the item at oldIndex will shorten the list by 1.
       newIndex -= 1;
     }
-    final Map<String, Object> element = newsList.removeAt(oldIndex);
+    final News element = newsList.removeAt(oldIndex);
     newsList.insert(newIndex, element);
   }
 
@@ -127,15 +140,9 @@ class _MainNewsPageState extends State<MainNewsPage> {
                 onReorder: onReoder,
                 itemCount: newsList.length,
                 itemBuilder: (ctx, index) {
-                  final title = (newsList[index]["title"] is String)
-                      ? (newsList[index]["title"])
-                      : "";
-                  final status = (newsList[index]["status"] is NewsStatus)
-                      ? (newsList[index]["status"] as NewsStatus)
-                      : null;
-                  final category = (newsList[index]["category"] is NewsCategory)
-                      ? (newsList[index]["category"] as NewsCategory)
-                      : null;
+                  final title = newsList[index].title ?? "";
+                  final status = newsList[index].status;
+                  final category = newsList[index].category;
                   return isReorderEnabled
                       ? NewsTile(
                           key: Key(title),
