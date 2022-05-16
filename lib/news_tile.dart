@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'news_category.dart';
 import 'news_status.dart';
 
-class NewsRecord extends StatelessWidget {
+class NewsTile extends StatelessWidget {
   final NewsCategory category;
   final String title;
   final NewsStatus status;
   final Color color;
 
-  NewsRecord(
+  NewsTile(
       {@required this.category,
       @required this.title,
       @required this.status,
@@ -87,9 +87,35 @@ class NewsRecord extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
           ),
         ));
   }
 }
+
+
+// Card(
+//           child: ListTile(
+//             leading:
+//                 Image.asset(category.imagepath ?? "assets/images/default.png"),
+//             title: Text(
+//               title,
+//               overflow: TextOverflow.ellipsis,
+//               maxLines: 1,
+//               softWrap: false,
+//               // style: TextStyle(backgroundColor: Colors.red),
+//             ),
+//             subtitle: IgnorePointer(
+//                 ignoring: true,
+//                 child: ElevatedButton(
+//                     child: Text(status.rawValue ?? ""),
+//                     onPressed: () {},
+//                     style: ElevatedButton.styleFrom(
+//                       primary: status
+//                           .primaryColor, //Color.fromARGB(255, 198, 126, 210),
+//                       onPrimary: status
+//                           .secondaryColor, //Color.fromARGB(255, 108, 8, 125),
+//                     ))),
+//             trailing: Icon(Icons.more_vert),
+//           ),
+//         )

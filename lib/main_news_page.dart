@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/news_category.dart';
-import 'package:news_app/news_record.dart';
+import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
 
 class MainNewsPage extends StatefulWidget {
@@ -13,7 +13,7 @@ List<Map<String, Object>> stubData() {
     {
       "title": "11",
       "status": NewsStatus.responded,
-      "category": NewsCategory.animal
+      "category": NewsCategory.animal,
     },
     {
       "title": "22",
@@ -137,7 +137,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                       ? (newsList[index]["category"] as NewsCategory)
                       : null;
                   return isReorderEnabled
-                      ? NewsRecord(
+                      ? NewsTile(
                           key: Key(title),
                           title: title,
                           status: status,
@@ -145,7 +145,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                           color: Colors.amber)
                       : IgnorePointer(
                           key: Key(title),
-                          child: NewsRecord(
+                          child: NewsTile(
                             key: Key(title),
                             title: title,
                             status: status,
@@ -196,8 +196,6 @@ class _MainNewsPageState extends State<MainNewsPage> {
 //     builder: (ctx) => MainNewsScreen(),
 //   ),
 // );
-
-
 
 // child: ListTile(
 //   // dense: true,
