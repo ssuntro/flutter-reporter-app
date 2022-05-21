@@ -91,7 +91,14 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
             AppBar(
           leading: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (ctx) => AddNewsPage(),
+                ),
+              );
+            },
             child: Icon(Icons.add),
           ),
           actions: [
