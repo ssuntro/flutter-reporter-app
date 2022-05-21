@@ -8,12 +8,14 @@ class NewsTile extends StatelessWidget {
   final String title;
   final NewsStatus status;
   final Color color;
+  final Function(String) onTileDidClick;
 
   NewsTile(
       {@required this.category,
       @required this.title,
       @required this.status,
       @required this.color,
+      @required this.onTileDidClick,
       Key key})
       : super(key: key);
 
@@ -29,7 +31,9 @@ class NewsTile extends StatelessWidget {
               onPrimary: Colors.black,
               shadowColor: Colors.transparent,
               padding: EdgeInsets.all(0)),
-          onPressed: () {},
+          onPressed: () {
+            onTileDidClick(title);
+          },
           child: Row(
             children: [
               Image.asset(category.imagepath ?? "assets/images/default.png"),
