@@ -81,8 +81,9 @@ class _MainNewsPageState extends State<MainNewsPage> {
   }
 
   onTileDidClick(String title) {
-    final clicked = newsList.firstWhere((elem) => elem.title == title);
-    Navigator.of(context).pushNamed(NewsPage.routeName);
+    final selectedNews = newsList.firstWhere((elem) => elem.title == title);
+    Navigator.of(context)
+        .pushNamed(NewsPage.routeName, arguments: {'news': selectedNews});
   }
 
   @override
@@ -192,7 +193,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                       title: title,
                       status: status,
                       category: category,
-                      onTileDidClick: onTileDidClick,
+                      onDidClick: onTileDidClick,
                       color: isReorderEnabled ? Colors.amber : Colors.white);
                 }
 
