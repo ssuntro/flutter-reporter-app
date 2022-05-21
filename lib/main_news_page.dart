@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
+import 'package:news_app/news_page.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
 
@@ -55,6 +56,10 @@ class _MainNewsPageState extends State<MainNewsPage> {
   var isReorderEnabled = false;
 
   onReoder(oldIndex, newIndex) {
+    if (!isReorderEnabled) {
+      return;
+    }
+
     if (oldIndex < newIndex) {
       // removing the item at oldIndex will shorten the list by 1.
       newIndex -= 1;
@@ -182,23 +187,13 @@ class _MainNewsPageState extends State<MainNewsPage> {
                   final title = newsList[index].title ?? "";
                   final status = newsList[index].status;
                   final category = newsList[index].category;
-                  return isReorderEnabled
-                      ? NewsTile(
-                          key: Key(title),
-                          title: title,
-                          status: status,
-                          category: category,
-                          color: Colors.amber)
-                      : IgnorePointer(
-                          key: Key(title),
-                          child: NewsTile(
-                            key: Key(title),
-                            title: title,
-                            status: status,
-                            category: category,
-                            color: Colors.white,
-                          ),
-                        );
+                  return NewsTile(
+                      key: Key(title),
+                      title: title,
+                      status: status,
+                      category: category,
+                      onTileDidClick: onTileDidClick,
+                      color: isReorderEnabled ? Colors.amber : Colors.white);
                 }
 
                 // child: ListView.builder(
