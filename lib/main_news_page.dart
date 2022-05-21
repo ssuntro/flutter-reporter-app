@@ -75,6 +75,11 @@ class _MainNewsPageState extends State<MainNewsPage> {
     });
   }
 
+  onTileDidClick(String title) {
+    final clicked = newsList.firstWhere((elem) => elem.title == title);
+    Navigator.of(context).pushNamed(NewsPage.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

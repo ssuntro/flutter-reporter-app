@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/main_news_page.dart';
+import 'package:news_app/news_page.dart';
 import 'package:news_app/splash_page.dart';
 
 import 'add_news_page.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         MainNewsPage.routeName: (ctx) => MainNewsPage(),
-        AddNewsPage.routeName: (ctx) => AddNewsPage()
+        AddNewsPage.routeName: (ctx) => AddNewsPage(),
+        NewsPage.routeName: (ctx) => NewsPage(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(
