@@ -69,6 +69,12 @@ class _MainNewsPageState extends State<MainNewsPage> {
     });
   }
 
+  onAddNews(News aNews) {
+    setState(() {
+      newsList.add(aNews);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,11 +98,28 @@ class _MainNewsPageState extends State<MainNewsPage> {
             AppBar(
           leading: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (ctx) => AddNewsPage(),
-                ),
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     fullscreenDialog: true,
+              //     builder: (ctx) => AddNewsPage(
+              //       onAddButtonDidClick: onAddNews,
+              //     ),
+              //   ),
+              // );
+              showGeneralDialog(
+                context: context,
+                pageBuilder: (context, anim1, anim2) {
+                  return AddNewsPage(
+                    onAddButtonDidClick: onAddNews,
+                  );
+                },
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return SlideTransition(
+                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                        .animate(anim1),
+                    child: child,
+                  );
+                },
               );
             },
             child: Icon(Icons.add),
