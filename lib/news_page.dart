@@ -8,9 +8,10 @@ class NewsPage extends StatelessWidget {
     final arguments = (ModalRoute.of(context).settings.arguments ??
         <String, dynamic>{}) as Map;
     final model = arguments["news"] as News;
+    final onRemove = arguments["onRemove"] as Function(String);
     return Scaffold(
       appBar: AppBar(
-        title: Text("News detail"), //model == null ?  : model.title),
+        title: Text("News detail"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -24,7 +25,7 @@ class NewsPage extends StatelessWidget {
                   children: [
                     Flexible(
                         child: Text(
-                      model.title,
+                      model?.title ?? "",
                       softWrap: true,
                       style: TextStyle(fontSize: 18),
                     )),
@@ -34,15 +35,20 @@ class NewsPage extends StatelessWidget {
                     Row(
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: model == null ? null : () {},
                           child: Icon(Icons.calendar_month),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: model == null ? null : () {},
                           child: Icon(Icons.ios_share),
                         ),
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: (model == null || onRemove == null)
+                                ? null
+                                : () {
+                                    Navigator.of(context).pop();
+                                    onRemove(model.title);
+                                  },
                             child: Icon(Icons.remove_circle),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.redAccent,
@@ -54,7 +60,7 @@ class NewsPage extends StatelessWidget {
                 SizedBox(
                   height: 100,
                 ),
-                Text(model.body, softWrap: true),
+                Text(model?.body ?? "", softWrap: true),
                 SizedBox(
                   height: 100,
                 ),

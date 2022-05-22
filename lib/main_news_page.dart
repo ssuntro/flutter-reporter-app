@@ -82,8 +82,15 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
   onTileDidClick(String title) {
     final selectedNews = newsList.firstWhere((elem) => elem.title == title);
-    Navigator.of(context)
-        .pushNamed(NewsPage.routeName, arguments: {'news': selectedNews});
+    Navigator.of(context).pushNamed(NewsPage.routeName,
+        arguments: {'news': selectedNews, 'onRemove': onRemove});
+  }
+
+  onRemove(String title) {
+    final index = newsList.indexWhere((elem) => elem.title == title);
+    setState(() {
+      newsList.removeAt(index);
+    });
   }
 
   @override
