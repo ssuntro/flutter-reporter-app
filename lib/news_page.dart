@@ -1,8 +1,28 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
 
 class NewsPage extends StatelessWidget {
   static const routeName = 'news-page';
+
+  Event buildEvent({Recurrence recurrence}) {
+    return Event(
+      title: 'Test eventeee',
+      description: 'example',
+      location: 'Flutter app',
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(minutes: 30)),
+      allDay: false,
+      iosParams: IOSParams(
+        reminder: Duration(minutes: 40),
+      ),
+      androidParams: AndroidParams(
+        emailInvites: ["test@example.com"],
+      ),
+      recurrence: recurrence,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context).settings.arguments ??
@@ -35,7 +55,13 @@ class NewsPage extends StatelessWidget {
                     Row(
                       children: [
                         ElevatedButton(
-                          onPressed: model == null ? null : () {},
+                          onPressed: model == null
+                              ? null
+                              : () {
+                                  Add2Calendar.addEvent2Cal(
+                                    buildEvent(),
+                                  );
+                                },
                           child: Icon(Icons.calendar_month),
                         ),
                         ElevatedButton(
