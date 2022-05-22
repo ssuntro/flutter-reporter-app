@@ -27,12 +27,18 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  onShareButtonDidClick() async {
+  onShareButtonDidClick({String path}) async {
     // try {
     //   await launchUrl(Uri.parse('https://flutter.dev'));
     // } catch (error) {}
 
-    jumpTofb();
+    // jumpTofb();
+
+    try {
+      await launchUrl(Uri.parse(path));
+    } catch (error) {
+      print("error");
+    }
   }
 
   jumpTofb() async {
@@ -94,8 +100,11 @@ class NewsPage extends StatelessWidget {
                           child: Icon(Icons.calendar_month),
                         ),
                         ElevatedButton(
-                          onPressed:
-                              model == null ? null : onShareButtonDidClick,
+                          onPressed: model == null
+                              ? null
+                              : () {
+                                  onShareButtonDidClick(path: model.url);
+                                },
                           child: Icon(Icons.ios_share),
                         ),
                         ElevatedButton(
