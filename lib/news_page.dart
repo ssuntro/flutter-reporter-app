@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatelessWidget {
   static const routeName = 'news-page';
@@ -21,6 +25,31 @@ class NewsPage extends StatelessWidget {
       ),
       recurrence: recurrence,
     );
+  }
+
+  onShareButtonDidClick() async {
+    // try {
+    //   await launchUrl(Uri.parse('https://flutter.dev'));
+    // } catch (error) {}
+
+    jumpTofb();
+  }
+
+  jumpTofb() async {
+    try {
+      // final canLaunch = await canLaunchUrl(Uri.parse('fb://profile/555'));
+
+      if (Platform.isIOS) {
+        await launchUrl(Uri.parse(
+            ['fb://profile/555', 'itms-apps://apple.com/app/id284882215'][1]));
+      }
+      if (Platform.isAndroid) {
+        await launchUrl(Uri.parse(
+            ['fb://page/555', 'market://details?id=com.facebook.katana'][1]));
+      }
+    } catch (error) {
+      print("error");
+    }
   }
 
   @override
@@ -65,7 +94,8 @@ class NewsPage extends StatelessWidget {
                           child: Icon(Icons.calendar_month),
                         ),
                         ElevatedButton(
-                          onPressed: model == null ? null : () {},
+                          onPressed:
+                              model == null ? null : onShareButtonDidClick,
                           child: Icon(Icons.ios_share),
                         ),
                         ElevatedButton(

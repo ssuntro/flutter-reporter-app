@@ -3,8 +3,6 @@ import 'package:news_app/main_news_page.dart';
 import 'package:news_app/news_page.dart';
 import 'package:news_app/splash_page.dart';
 
-import 'add_news_page.dart';
-
 void main() {
   runApp(MyApp());
 }
