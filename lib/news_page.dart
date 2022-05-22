@@ -5,11 +5,11 @@ import 'package:news_app/news.dart';
 class NewsPage extends StatelessWidget {
   static const routeName = 'news-page';
 
-  Event buildEvent({Recurrence recurrence}) {
+  Event buildEvent({News model, Recurrence recurrence}) {
     return Event(
-      title: 'Test eventeee',
-      description: 'example',
-      location: 'Flutter app',
+      title: model.title,
+      description: model.body,
+      location: 'News app',
       startDate: DateTime.now(),
       endDate: DateTime.now().add(Duration(minutes: 30)),
       allDay: false,
@@ -17,7 +17,7 @@ class NewsPage extends StatelessWidget {
         reminder: Duration(minutes: 40),
       ),
       androidParams: AndroidParams(
-        emailInvites: ["test@example.com"],
+        emailInvites: ["ann@ktbg.com"],
       ),
       recurrence: recurrence,
     );
@@ -59,7 +59,7 @@ class NewsPage extends StatelessWidget {
                               ? null
                               : () {
                                   Add2Calendar.addEvent2Cal(
-                                    buildEvent(),
+                                    buildEvent(model: model),
                                   );
                                 },
                           child: Icon(Icons.calendar_month),
