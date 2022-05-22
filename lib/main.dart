@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         MainNewsPage.routeName: (ctx) => MainNewsPage(),
-        AddNewsPage.routeName: (ctx) => AddNewsPage(),
+        // AddNewsPage.routeName: (ctx) => AddNewsPage(),
         NewsPage.routeName: (ctx) => NewsPage(),
       },
       title: 'Flutter Demo',
