@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
+import 'package:news_app/news_list.dart';
 import 'package:news_app/news_page.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
@@ -54,6 +55,19 @@ List<News> stubData() {
 class _MainNewsPageState extends State<MainNewsPage> {
   var newsList = stubData();
   var isReorderEnabled = false;
+
+  Future<void> fetchNews() {
+    return NewsList.fetchAPI().then((newValue) {
+      setState(() {
+        newsList = newValue;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   onReoder(oldIndex, newIndex) {
     if (!isReorderEnabled) {
@@ -188,54 +202,57 @@ class _MainNewsPageState extends State<MainNewsPage> {
             //   ),
             // ),
 
-            child: ReorderableListView.builder(
-                onReorder: onReoder,
-                itemCount: newsList.length,
-                itemBuilder: (ctx, index) {
-                  final title = newsList[index].title ?? "";
-                  final status = newsList[index].status;
-                  final category = newsList[index].category;
-                  return NewsTile(
-                      key: Key(title),
-                      title: title,
-                      status: status,
-                      category: category,
-                      onDidClick: onTileDidClick,
-                      color: isReorderEnabled ? Colors.amber : Colors.white);
-                }
+            child: RefreshIndicator(
+          child: ReorderableListView.builder(
+              onReorder: onReoder,
+              itemCount: newsList.length,
+              itemBuilder: (ctx, index) {
+                final title = newsList[index].title ?? "";
+                final status = newsList[index].status;
+                final category = newsList[index].category;
+                return NewsTile(
+                    key: Key(title),
+                    title: title,
+                    status: status,
+                    category: category,
+                    onDidClick: onTileDidClick,
+                    color: isReorderEnabled ? Colors.amber : Colors.white);
+              }
 
-                // child: ListView.builder(
-                //   itemCount: 10,
-                //   itemBuilder: (ctx, index) => Container(
-                //     child: Text(
-                //       "${index + 1}",
-                //       style: TextStyle(fontSize: 150),
-                //     ),
-                //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
-                //     height: 100,
-                //     width: 10,
-                //   ),
-                // ),
+              // child: ListView.builder(
+              //   itemCount: 10,
+              //   itemBuilder: (ctx, index) => Container(
+              //     child: Text(
+              //       "${index + 1}",
+              //       style: TextStyle(fontSize: 150),
+              //     ),
+              //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
+              //     height: 100,
+              //     width: 10,
+              //   ),
+              // ),
 
-                // child: ListView(
-                //   children: <Widget>[
-                //     ...new List<int>.generate(10, (i) => i + 1)
-                //         .map(
-                //           (number) => Container(
-                //             child: Text(
-                //               "${number}",
-                //               style: TextStyle(fontSize: 150),
-                //             ),
-                //             color:
-                //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
-                //             height: 100,
-                //             width: 10,
-                //           ),
-                //         )
-                //         .toList()
-                //   ],
-                // ),
-                )));
+              // child: ListView(
+              //   children: <Widget>[
+              //     ...new List<int>.generate(10, (i) => i + 1)
+              //         .map(
+              //           (number) => Container(
+              //             child: Text(
+              //               "${number}",
+              //               style: TextStyle(fontSize: 150),
+              //             ),
+              //             color:
+              //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
+              //             height: 100,
+              //             width: 10,
+              //           ),
+              //         )
+              //         .toList()
+              //   ],
+              // ),
+              ),
+          onRefresh: () => fetchNews(),
+        )));
   }
 }
 
