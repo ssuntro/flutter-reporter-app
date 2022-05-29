@@ -7,14 +7,14 @@ import 'news_category.dart';
 import 'news_status.dart';
 
 class NewsList {
-  static Future<List<News>> fetchAPI() {
-    return http
-        .get(Uri.parse(
-            'https://www.hackingwithswift.com/samples/petitions-2.json'))
-        .then((response) {
+  static Future<List<News>> fetchAPI() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://www.hackingwithswift.com/samples/petitions-2.json'));
       if (response.statusCode >= 400) {
         throw HttpException("Error Jaaaa ${response.statusCode}");
       }
+
       final data = json.decode(response.body) as Map<String, dynamic>;
       final animals = (data["results"] as List<dynamic>).take(5).map((item) {
         return News(
@@ -54,8 +54,8 @@ class NewsList {
             category: NewsCategory.finance);
       }).toList();
       return [...animals, ...globalWarming, ...finance];
-    }).catchError((err) {
+    } catch (error) {
       return <News>[];
-    });
+    }
   }
 }
