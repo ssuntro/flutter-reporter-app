@@ -56,11 +56,10 @@ class _MainNewsPageState extends State<MainNewsPage> {
   var newsList = stubData();
   var isReorderEnabled = false;
 
-  Future<void> fetchNews() {
-    return NewsList.fetchAPI().then((newValue) {
-      setState(() {
-        newsList = newValue;
-      });
+  Future<void> fetchNews() async {
+    final newValue = await NewsList.fetchAPI();
+    setState(() {
+      newsList = newValue;
     });
   }
 
