@@ -24,7 +24,7 @@ List<News> stubData() {
     News(
         title: "22",
         body: "body 22",
-        url: "google.com",
+        url: "https://google.com",
         status: NewsStatus.closed,
         category: NewsCategory.globalWarming),
     News(
