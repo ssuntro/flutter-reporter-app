@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
 //////
-  AnimationController _controller;
+  AnimationController _controller; //6 places
   var showButton = false;
   @override
   void initState() {

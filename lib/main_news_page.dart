@@ -8,12 +8,6 @@ import 'package:news_app/news_status.dart';
 
 import 'add_news_page.dart';
 
-class MainNewsPage extends StatefulWidget {
-  static const routeName = '/main-news-page';
-  @override
-  State<MainNewsPage> createState() => _MainNewsPageState();
-}
-
 List<News> stubData() {
   return [
     News(
@@ -52,6 +46,12 @@ List<News> stubData() {
   // ];
 }
 
+class MainNewsPage extends StatefulWidget {
+  static const routeName = '/main-news-page';
+  @override
+  State<MainNewsPage> createState() => _MainNewsPageState();
+}
+
 class _MainNewsPageState extends State<MainNewsPage> {
   var newsList = stubData();
   var isReorderEnabled = false;
@@ -61,11 +61,6 @@ class _MainNewsPageState extends State<MainNewsPage> {
     setState(() {
       newsList = newValue;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   onReoder(oldIndex, newIndex) {
