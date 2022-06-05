@@ -80,10 +80,10 @@ class _NewsPageState extends State<NewsPage> {
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      final String result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = result;
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+      batteryLevel = "Failed to contract native code: '${e.message}'.";
     }
 
     setState(() {

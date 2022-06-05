@@ -13,26 +13,10 @@ import Flutter
       batteryChannel.setMethodCallHandler({
         [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
         // Note: this method is invoked on the UI thread.
-        guard call.method == "getBatteryLevel" else {
-          result(111)
-          return
-        }
-          result(222)
-//        self?.receiveBatteryLevel(result: 222)
+          result("iOS ja")
       })
       
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-//    private func receiveBatteryLevel(result: FlutterResult) {
-//      let device = UIDevice.current
-//      device.isBatteryMonitoringEnabled = true
-//      if device.batteryState == UIDevice.BatteryState.unknown {
-//        result(FlutterError(code: "UNAVAILABLE",
-//                            message: "Battery info unavailable",
-//                            details: nil))
-//      } else {
-//        result(Int(device.batteryLevel * 100))
-//      }
-//    }
 }
