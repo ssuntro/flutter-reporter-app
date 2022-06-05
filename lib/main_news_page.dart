@@ -57,10 +57,10 @@ class _MainNewsPageState extends State<MainNewsPage> {
   var isReorderEnabled = false;
 
   Future<void> fetchNews() async {
-    final newValue = await NewsList.fetchAPI();
-    setState(() {
-      newsList = newValue;
-    });
+    // final newValue = await NewsList.fetchAPI();
+    // setState(() {
+    //   newsList = newValue;
+    // });
   }
 
   onReoder(oldIndex, newIndex) {

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'news.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -6,8 +8,14 @@ import 'dart:convert';
 import 'news_category.dart';
 import 'news_status.dart';
 
-class NewsList {
-  static Future<List<News>> fetchAPI() async {
+class NewsList with ChangeNotifier {
+  List<News> _items = [];
+
+  List<News> get items {
+    return [..._items];
+  }
+
+  Future<List<News>> fetchFromNetwork() async {
     try {
       final response = await http.get(Uri.parse(
           'https://www.hackingwithswift.com/samples/petitions-2.json'));

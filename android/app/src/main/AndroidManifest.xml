@@ -16,7 +16,7 @@
     </queries>
 
    <application
-        android:label="news app1"
+        android:label="Annja eiei"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
