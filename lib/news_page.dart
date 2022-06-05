@@ -71,23 +71,24 @@ class _NewsPageState extends State<NewsPage> {
   @override
   initState() {
     super.initState();
-    _getBatteryLevel();
+    _getTitle();
   }
 
-  static const platform = MethodChannel('samples.flutter.dev/battery');
-  String _batteryLevel = 'Unknown battery level.';
-
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+/////bridging
+  static const platform = MethodChannel('flutter.native/helper');
+  String _title = 'Unknown';
+  Future<void> _getTitle() async {
+    String title;
     try {
-      final String result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = result;
+      final String result = await platform
+          .invokeMethod('helloFromNativeCode'); //helloFromNativeCode
+      title = result;
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to contract native code: '${e.message}'.";
+      title = "Failed to contract native code: '${e.message}'.";
     }
 
     setState(() {
-      _batteryLevel = batteryLevel;
+      _title = title;
     });
   }
 
@@ -100,7 +101,7 @@ class _NewsPageState extends State<NewsPage> {
     final onRemove = arguments["onRemove"] as Function(String);
     return Scaffold(
       appBar: AppBar(
-        title: Text("${_batteryLevel}"),
+        title: Text("${_title}"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

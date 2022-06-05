@@ -8,7 +8,7 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
       let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-          let batteryChannel = FlutterMethodChannel(name: "samples.flutter.dev/battery",
+          let batteryChannel = FlutterMethodChannel(name: "flutter.native/helper",
                                                     binaryMessenger: controller.binaryMessenger)
       batteryChannel.setMethodCallHandler({
         [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
