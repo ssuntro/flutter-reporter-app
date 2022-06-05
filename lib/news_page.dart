@@ -6,9 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NewsPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
+
+class NewsPage extends StatefulWidget {
   static const routeName = 'news-page';
 
+  @override
+  State<NewsPage> createState() => _NewsPageState();
+}
+
+class _NewsPageState extends State<NewsPage> {
   Event buildEvent({News model, Recurrence recurrence}) {
     return Event(
       title: model.title,
@@ -58,6 +67,31 @@ class NewsPage extends StatelessWidget {
     }
   }
 
+  ///bridging native
+  @override
+  initState() {
+    super.initState();
+    _getBatteryLevel();
+  }
+
+  static const platform = MethodChannel('samples.flutter.dev/battery');
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
+//////
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context).settings.arguments ??
@@ -66,7 +100,7 @@ class NewsPage extends StatelessWidget {
     final onRemove = arguments["onRemove"] as Function(String);
     return Scaffold(
       appBar: AppBar(
-        title: Text("News detail"),
+        title: Text("${_batteryLevel}"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
