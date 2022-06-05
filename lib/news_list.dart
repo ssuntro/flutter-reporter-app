@@ -15,7 +15,29 @@ class NewsList with ChangeNotifier {
     return [..._items];
   }
 
-  Future<List<News>> fetchFromNetwork() async {
+  void reorder(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      // removing the item at oldIndex will shorten the list by 1.
+      newIndex -= 1;
+    }
+
+    final News element = _items.removeAt(oldIndex);
+    _items.insert(newIndex, element);
+    notifyListeners();
+  }
+
+  void addItem(News aNews) {
+    _items.add(aNews);
+    notifyListeners();
+  }
+
+  void removeItemFor({String title}) {
+    final index = _items.indexWhere((elem) => elem.title == title);
+    _items.removeAt(index);
+    notifyListeners();
+  }
+
+  Future<void> fetchFromNetwork() async {
     try {
       final response = await http.get(Uri.parse(
           'https://www.hackingwithswift.com/samples/petitions-2.json'));
@@ -61,9 +83,11 @@ class NewsList with ChangeNotifier {
                 : null,
             category: NewsCategory.finance);
       }).toList();
-      return [...animals, ...globalWarming, ...finance];
+      _items = [...animals, ...globalWarming, ...finance];
     } catch (error) {
-      return <News>[];
+      _items = <News>[];
+    } finally {
+      notifyListeners();
     }
   }
 }

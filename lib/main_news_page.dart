@@ -5,6 +5,7 @@ import 'package:news_app/news_list.dart';
 import 'package:news_app/news_page.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:news_app/news_status.dart';
+import 'package:provider/provider.dart';
 
 import 'add_news_page.dart';
 
@@ -48,57 +49,151 @@ List<News> stubData() {
 
 class MainNewsPage extends StatefulWidget {
   static const routeName = '/main-news-page';
+
   @override
   State<MainNewsPage> createState() => _MainNewsPageState();
 }
 
 class _MainNewsPageState extends State<MainNewsPage> {
-  var newsList = stubData();
+  // var newsList = stubData();
   var isReorderEnabled = false;
+  Future _onScreenFirstBuild;
+
+  @override
+  void initState() {
+    _onScreenFirstBuild =
+        Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
+    super.initState();
+  }
 
   Future<void> fetchNews() async {
     // final newValue = await NewsList.fetchAPI();
     // setState(() {
     //   newsList = newValue;
     // });
+
+    Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
   }
 
-  onReoder(oldIndex, newIndex) {
+  onReoder(int oldIndex, int newIndex) {
     if (!isReorderEnabled) {
       return;
     }
 
-    if (oldIndex < newIndex) {
-      // removing the item at oldIndex will shorten the list by 1.
-      newIndex -= 1;
-    }
-    final News element = newsList.removeAt(oldIndex);
-    newsList.insert(newIndex, element);
+    Provider.of<NewsList>(context, listen: false).reorder(oldIndex, newIndex);
   }
 
   onRefreshButtonDidClick() {
-    setState(() {
-      newsList = stubData();
-    });
+    // setState(() {
+    //   newsList = stubData();
+    // });
+    Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
   }
 
   onAddNews(News aNews) {
-    setState(() {
-      newsList.add(aNews);
-    });
+    // setState(() {
+    //   newsList.add(aNews);
+    // });
+    Provider.of<NewsList>(context, listen: false).addItem(aNews);
   }
 
   onTileDidClick(String title) {
-    final selectedNews = newsList.firstWhere((elem) => elem.title == title);
+    final selectedNews = Provider.of<NewsList>(context, listen: false)
+        .items
+        .firstWhere((elem) => elem.title == title);
     Navigator.of(context).pushNamed(NewsPage.routeName,
         arguments: {'news': selectedNews, 'onRemove': onRemove});
   }
 
   onRemove(String title) {
-    final index = newsList.indexWhere((elem) => elem.title == title);
-    setState(() {
-      newsList.removeAt(index);
-    });
+    Provider.of<NewsList>(context, listen: false).removeItemFor(title: title);
+    // final index = Provider.of<NewsList>(context, listen: false)
+    //     .items
+    //     .indexWhere((elem) => elem.title == title);
+    // setState(() {
+    //   newsList.removeAt(index);
+    // });
+  }
+
+  Widget drawTable(BuildContext context, NewsList model, Widget child) {
+    return Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+
+        // child: SingleChildScrollView(
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //     children: [
+        //       ...new List<int>.generate(10, (i) => i + 1)
+        //           .map(
+        //             (number) => Container(
+        //               child: Text(
+        //                 "${number}",
+        //                 style: TextStyle(fontSize: 150),
+        //               ),
+        //               color: (number % 2 == 0)
+        //                   ? Colors.amber
+        //                   : Colors.blueAccent,
+        //               height: 100,
+        //               width: 10,
+        //             ),
+        //           )
+        //           .toList()
+        //     ],
+        //   ),
+        // ),
+
+        child: RefreshIndicator(
+      child: ReorderableListView.builder(
+          onReorder: onReoder,
+          itemCount: model.items.length,
+          itemBuilder: (ctx, index) {
+            final title = model.items[index].title ?? "";
+            final status = model.items[index].status;
+            final category = model.items[index].category;
+            return NewsTile(
+                key: Key(title),
+                title: title,
+                status: status,
+                category: category,
+                onDidClick: onTileDidClick,
+                color: isReorderEnabled ? Colors.amber : Colors.white);
+          }
+
+          // child: ListView.builder(
+          //   itemCount: 10,
+          //   itemBuilder: (ctx, index) => Container(
+          //     child: Text(
+          //       "${index + 1}",
+          //       style: TextStyle(fontSize: 150),
+          //     ),
+          //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
+          //     height: 100,
+          //     width: 10,
+          //   ),
+          // ),
+
+          // child: ListView(
+          //   children: <Widget>[
+          //     ...new List<int>.generate(10, (i) => i + 1)
+          //         .map(
+          //           (number) => Container(
+          //             child: Text(
+          //               "${number}",
+          //               style: TextStyle(fontSize: 150),
+          //             ),
+          //             color:
+          //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
+          //             height: 100,
+          //             width: 10,
+          //           ),
+          //         )
+          //         .toList()
+          //   ],
+          // ),
+          ),
+      onRefresh: () => fetchNews(),
+    ));
   }
 
   @override
@@ -169,84 +264,16 @@ class _MainNewsPageState extends State<MainNewsPage> {
             ),
           ],
         ),
-        body: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-
-            // child: SingleChildScrollView(
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.stretch,
-            //     children: [
-            //       ...new List<int>.generate(10, (i) => i + 1)
-            //           .map(
-            //             (number) => Container(
-            //               child: Text(
-            //                 "${number}",
-            //                 style: TextStyle(fontSize: 150),
-            //               ),
-            //               color: (number % 2 == 0)
-            //                   ? Colors.amber
-            //                   : Colors.blueAccent,
-            //               height: 100,
-            //               width: 10,
-            //             ),
-            //           )
-            //           .toList()
-            //     ],
-            //   ),
-            // ),
-
-            child: RefreshIndicator(
-          child: ReorderableListView.builder(
-              onReorder: onReoder,
-              itemCount: newsList.length,
-              itemBuilder: (ctx, index) {
-                final title = newsList[index].title ?? "";
-                final status = newsList[index].status;
-                final category = newsList[index].category;
-                return NewsTile(
-                    key: Key(title),
-                    title: title,
-                    status: status,
-                    category: category,
-                    onDidClick: onTileDidClick,
-                    color: isReorderEnabled ? Colors.amber : Colors.white);
-              }
-
-              // child: ListView.builder(
-              //   itemCount: 10,
-              //   itemBuilder: (ctx, index) => Container(
-              //     child: Text(
-              //       "${index + 1}",
-              //       style: TextStyle(fontSize: 150),
-              //     ),
-              //     color: (index + 1) % 2 == 0 ? Colors.amber : Colors.blueAccent,
-              //     height: 100,
-              //     width: 10,
-              //   ),
-              // ),
-
-              // child: ListView(
-              //   children: <Widget>[
-              //     ...new List<int>.generate(10, (i) => i + 1)
-              //         .map(
-              //           (number) => Container(
-              //             child: Text(
-              //               "${number}",
-              //               style: TextStyle(fontSize: 150),
-              //             ),
-              //             color:
-              //                 (number % 2 == 0) ? Colors.amber : Colors.blueAccent,
-              //             height: 100,
-              //             width: 10,
-              //           ),
-              //         )
-              //         .toList()
-              //   ],
-              // ),
-              ),
-          onRefresh: () => fetchNews(),
-        )));
+        body: FutureBuilder(
+          future: _onScreenFirstBuild,
+          builder: (ctx, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? Center(child: CircularProgressIndicator())
+                  : Consumer<NewsList>(
+                      child: null,
+                      builder: drawTable,
+                    ),
+        ));
   }
 }
 
