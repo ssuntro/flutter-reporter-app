@@ -219,14 +219,6 @@ class _MainNewsPageState extends State<MainNewsPage> {
             AppBar(
           leading: ElevatedButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     fullscreenDialog: true,
-              //     builder: (ctx) => AddNewsPage(
-              //       onAddButtonDidClick: onAddNews,
-              //     ),
-              //   ),
-              // );
               showGeneralDialog(
                 context: context,
                 pageBuilder: (context, anim1, anim2) {

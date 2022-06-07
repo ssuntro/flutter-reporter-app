@@ -8,7 +8,7 @@ class NewsTile extends StatelessWidget {
   final String title;
   final NewsStatus status;
   final Color color;
-  final Function(String) onDidClick;
+  final void Function(String) onDidClick;
 
   NewsTile(
       {@required this.category,
