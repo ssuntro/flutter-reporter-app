@@ -1,6 +1,6 @@
-# news_app
+# News App("Flutter" version)
 
-A new Flutter project.
+This is an extension version of **News App("Flutter 4 days" version)** for more information please visit [here](https://github.com/ssuntro/NewsApp_flutter_4Days_class) 
 
 ## Getting Started
 
