@@ -1,4 +1,4 @@
-# News App("Flutter" version)
+# News App("Final Flutter" version)
 
 This is an extension version of **News App("Flutter 4 days" version)** for more information please visit [here](https://github.com/ssuntro/NewsApp_flutter_4Days_class) 
 
