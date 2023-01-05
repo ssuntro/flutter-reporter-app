@@ -3,7 +3,9 @@
 This is an extension version of **News App("Flutter 4 days" version)** for more information please visit [here](https://github.com/ssuntro/NewsApp_flutter_4Days_class) 
 
 ## Getting Started
+`flutter pub get`
 
+## Appendix
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
