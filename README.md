@@ -1,6 +1,11 @@
 # News App("Final Flutter" version)
 
+
 This is an extension version of **News App("Flutter 4 days" version)** for more information please visit [here](https://github.com/ssuntro/NewsApp_flutter_4Days_class) 
+
+## General requirement 
+Flutter framework 3.19.6
+Tools • Dart 3.3.4 • DevTools 2.31.1
 
 ## Getting Started
 `flutter pub get`
