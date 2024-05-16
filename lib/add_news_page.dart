@@ -6,7 +6,7 @@ import 'package:news_app/news_status.dart';
 class AddNewsPage extends StatelessWidget {
   final Function(News) onAddButtonDidClick;
 
-  AddNewsPage({@required this.onAddButtonDidClick});
+  AddNewsPage({required this.onAddButtonDidClick});
   final model = News(
       title: "newNewsJa ${DateTime.now().toString()}",
       body:

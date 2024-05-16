@@ -12,7 +12,7 @@ extension NewsStatusExtension on NewsStatus {
       case NewsStatus.pendingResponse:
         return Color.fromARGB(255, 236, 214, 203);
       default:
-        return null;
+        return Color.fromARGB(255, 255, 255, 255);
     }
   }
 
@@ -25,7 +25,7 @@ extension NewsStatusExtension on NewsStatus {
       case NewsStatus.pendingResponse:
         return Color.fromARGB(255, 200, 66, 48);
       default:
-        return null;
+        return Color.fromARGB(255, 255, 255, 255);
     }
   }
 
@@ -38,7 +38,7 @@ extension NewsStatusExtension on NewsStatus {
       case NewsStatus.pendingResponse:
         return "pending response";
       default:
-        return null;
+        return "n/a";
     }
   }
 }

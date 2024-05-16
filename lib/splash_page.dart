@@ -6,7 +6,7 @@ import 'a_stateless_widget.dart';
 import 'main_news_page.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key key, this.title}) : super(key: key) {
+  SplashPage({Key? key,required this.title}) : super(key: key) {
     print("SplashPage - init widget");
   }
 
@@ -17,9 +17,13 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+
   _SplashPageState() {
     print("_SplashPageState - construct");
   }
+
+  late AnimationController _controller; //6 places
+
   @override
   void didUpdateWidget(SplashPage oldWidget) {
     print("_SplashPageState - didUpdateWidget");
@@ -34,7 +38,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
 //////
-  AnimationController _controller; //6 places
+
   var showButton = false;
   @override
   void initState() {

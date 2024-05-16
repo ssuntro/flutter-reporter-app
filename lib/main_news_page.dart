@@ -33,18 +33,11 @@ List<News> stubData() {
         title:
             "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
         body: "body 44",
-        url: null,
+        //todo: change to proper default url
+        url: "",
         status: NewsStatus.pendingResponse,
         category: NewsCategory.finance)
   ];
-  // [
-  //   {
-  //     "title":
-  //         "4jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk444jkjkjkjkjkjkjkjkjjkjk44",
-  //     // "status": NewsStatus.pendingResponse,
-  //     // "category": NewsCategory.finance
-  //   },
-  // ];
 }
 
 class MainNewsPage extends StatefulWidget {
@@ -57,7 +50,8 @@ class MainNewsPage extends StatefulWidget {
 class _MainNewsPageState extends State<MainNewsPage> {
   // var newsList = stubData();
   var isReorderEnabled = false;
-  Future _onScreenFirstBuild;
+  //todo: we should not use late
+  late Future _onScreenFirstBuild;
 
   @override
   void initState() {
@@ -115,7 +109,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
     // });
   }
 
-  Widget drawTable(BuildContext context, NewsList model, Widget child) {
+  Widget drawTable(BuildContext context, NewsList model, Widget ?child) {
     return Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

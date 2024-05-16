@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AStatefulWidget extends StatefulWidget {
   final String parsedString;
-  AStatefulWidget({this.parsedString}) {
+  AStatefulWidget({required this.parsedString}) {
     //typically parse and store here not leak to stateObj
     print("AStatefulWidget - new widget");
   }

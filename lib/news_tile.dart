@@ -11,12 +11,12 @@ class NewsTile extends StatelessWidget {
   final void Function(String) onDidClick;
 
   NewsTile(
-      {@required this.category,
-      @required this.title,
-      @required this.status,
-      @required this.color,
-      @required this.onDidClick,
-      Key key})
+      {required this.category,
+      required this.title,
+      required this.status,
+      required this.color,
+      required this.onDidClick,
+      Key? key})
       : super(key: key);
 
   @override
@@ -27,8 +27,7 @@ class NewsTile extends StatelessWidget {
         // color: index % 2 == 0 ? Colors.amber : Colors.blue,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              primary: color,
-              onPrimary: Colors.black,
+              foregroundColor: color,
               shadowColor: Colors.transparent,
               padding: EdgeInsets.all(0)),
           onPressed: () {
@@ -63,9 +62,9 @@ class NewsTile extends StatelessWidget {
                             child: Text(status.rawValue ?? ""),
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              primary: status
+                              foregroundColor: status
                                   .primaryColor, //Color.fromARGB(255, 198, 126, 210),
-                              onPrimary: status
+                              backgroundColor: status
                                   .secondaryColor, //Color.fromARGB(255, 108, 8, 125),
                             )),
                       ),

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: SplashPage(title: 'News App'),
+          home: SplashPage(title: 'News App',),
         ));
   }
 }

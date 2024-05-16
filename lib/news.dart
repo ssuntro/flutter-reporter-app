@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'news_category.dart';
 import 'news_status.dart';
 
@@ -11,9 +9,9 @@ class News {
   final NewsCategory category;
 
   News(
-      {@required this.title,
-      @required this.body,
-      @required this.url,
-      @required this.status,
-      @required this.category});
+      {required this.title,
+      required this.body,
+      required this.url,
+      required this.status,
+      required this.category});
 }

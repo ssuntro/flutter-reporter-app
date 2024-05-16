@@ -18,7 +18,7 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  Event buildEvent({News model, Recurrence recurrence}) {
+  Event buildEvent({required News model, Recurrence? recurrence}) {
     return Event(
       title: model.title,
       description: model.body,
@@ -36,7 +36,7 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  onShareButtonDidClick({String path}) async {
+  onShareButtonDidClick({required String path}) async {
     // try {
     //   await launchUrl(Uri.parse('https://flutter.dev'));
     // } catch (error) {}
@@ -95,7 +95,7 @@ class _NewsPageState extends State<NewsPage> {
 //////
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context).settings.arguments ??
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
     final model = arguments["news"] as News;
     final onRemove = arguments["onRemove"] as Function(String);
@@ -151,7 +151,7 @@ class _NewsPageState extends State<NewsPage> {
                                   },
                             child: Icon(Icons.remove_circle),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.redAccent,
+                              foregroundColor: Colors.redAccent,
                             )),
                       ],
                     )

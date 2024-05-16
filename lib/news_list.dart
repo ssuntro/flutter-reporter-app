@@ -31,7 +31,7 @@ class NewsList with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItemFor({String title}) {
+  void removeItemFor({required String title}) {
     final index = _items.indexWhere((elem) => elem.title == title);
     _items.removeAt(index);
     notifyListeners();
@@ -45,16 +45,19 @@ class NewsList with ChangeNotifier {
         throw HttpException("Error Jaaaa ${response.statusCode}");
       }
 
+      //todo: please remove dynamic and use proper type
       final data = json.decode(response.body) as Map<String, dynamic>;
       final animals = (data["results"] as List<dynamic>).take(5).map((item) {
         return News(
             title: (item["title"] is String) ? (item["title"] as String) : "",
             body: (item["body"] is String) ? (item["body"] as String) : "",
             url: (item["url"] is String) ? (item["url"] as String) : "",
-            status: (item["status"] is String)
-                ? NewsStatus.values
-                    .firstWhere((e) => e.rawValue == item["status"])
-                : null,
+            //todo: iterate with type-safe
+            status: NewsStatus.closed,
+            // (item["status"] is String)
+            //     ? NewsStatus.values
+            //         .firstWhere((e) => e.rawValue == item["status"] as String)
+            //     : "",
             category: NewsCategory.animal);
       }).toList();
 
@@ -64,10 +67,12 @@ class NewsList with ChangeNotifier {
             title: (item["title"] is String) ? (item["title"] as String) : "",
             body: (item["body"] is String) ? (item["body"] as String) : "",
             url: (item["url"] is String) ? (item["url"] as String) : "",
-            status: (item["status"] is String)
-                ? NewsStatus.values
-                    .firstWhere((e) => e.rawValue == item["status"])
-                : null,
+            status: NewsStatus.closed,
+            //todo: iterate with type-safe
+            // (item["status"] is String)
+            //     ? NewsStatus.values
+            //         .firstWhere((e) => e.rawValue == item["status"])
+            //     : "",
             category: NewsCategory.globalWarming);
       }).toList();
 
@@ -77,10 +82,12 @@ class NewsList with ChangeNotifier {
             title: (item["title"] is String) ? (item["title"] as String) : "",
             body: (item["body"] is String) ? (item["body"] as String) : "",
             url: (item["url"] is String) ? (item["url"] as String) : "",
-            status: (item["status"] is String)
-                ? NewsStatus.values
-                    .firstWhere((e) => e.rawValue == item["status"])
-                : null,
+            status: NewsStatus.closed,
+            //todo: iterate with type-safe
+            // (item["status"] is String)
+            //     ? NewsStatus.values
+            //         .firstWhere((e) => e.rawValue == item["status"])
+            //     : null,
             category: NewsCategory.finance);
       }).toList();
       _items = [...animals, ...globalWarming, ...finance];

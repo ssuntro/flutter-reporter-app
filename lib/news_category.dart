@@ -10,7 +10,8 @@ extension NewsCategoryExtension on NewsCategory {
       case NewsCategory.globalWarming:
         return "assets/images/global_warming.jpeg";
       default:
-        return null;
+      //todo: add default image
+        return "";
     }
   }
 
