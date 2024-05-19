@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'news_category.dart';
 import 'news_status.dart';
 
+//* ~store
 class NewsList with ChangeNotifier {
   List<News> _items = [];
 
