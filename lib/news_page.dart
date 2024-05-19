@@ -95,8 +95,8 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    final model = arguments["news"] as News;
-    final onRemove = arguments["onRemove"] as Function(String);
+    final model = arguments["news"] as News?;
+    final onRemove = arguments["onRemove"] as Function(String)?;
     return Scaffold(
       appBar: AppBar(
         title: Text("${_title}"),
@@ -127,7 +127,13 @@ class _NewsPageState extends State<NewsPage> {
                               ? null
                               : () {
                                   Add2Calendar.addEvent2Cal(
-                                    buildEvent(model: model),
+                                    buildEvent(
+                                        model: model,
+                                        recurrence: Recurrence(
+                                          frequency: Frequency.monthly,
+                                          interval: 2,
+                                          ocurrences: 6,
+                                        )),
                                   );
                                 },
                           child: Icon(Icons.calendar_month),
