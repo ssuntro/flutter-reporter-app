@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/news.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 
