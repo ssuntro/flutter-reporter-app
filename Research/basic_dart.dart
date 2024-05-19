@@ -7,7 +7,7 @@ void main() {
 
   one.name;
   two.age;
-  two.age = 1;
+  // two.age = 1;
   two.age!;
   two.age ?? "100";
   three.onCompare(2, 2);
