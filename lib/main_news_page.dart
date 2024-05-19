@@ -51,7 +51,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
   // var newsList = stubData();
   var isReorderEnabled = false;
   //todo: we should not use late
-  late Future _onScreenFirstBuild;
+  late final Future _onScreenFirstBuild;
 
   @override
   void initState() {
@@ -109,7 +109,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
     // });
   }
 
-  Widget drawTable(BuildContext context, NewsList model, Widget ?child) {
+  Widget drawTable(BuildContext context, NewsList model, Widget? child) {
     return Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
