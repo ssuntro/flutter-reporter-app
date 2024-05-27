@@ -2,6 +2,11 @@ void main() {
   final fruitString = 'banana';
   final fruit = Fruit.values.byName(fruitString);
   print("fruit $fruit");
+  final a = Vehicle.bicycle;
+  print(a.isTwoWheeled);
+  print(Vehicle.bicycle.compareTo(Vehicle.bus));
+
+  printError(NetworkError.badURL);
 }
 
 enum NetworkError { badURL, timeout, resourceNotAvilable }
