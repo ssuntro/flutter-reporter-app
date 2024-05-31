@@ -69,7 +69,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
     Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
   }
 
-  onReoder(int oldIndex, int newIndex) {
+  onReorder(int oldIndex, int newIndex) {
     if (!isReorderEnabled) {
       return;
     }
@@ -139,7 +139,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
         child: RefreshIndicator(
       child: ReorderableListView.builder(
-          onReorder: onReoder,
+          onReorder: onReorder,
           itemCount: model.items.length,
           itemBuilder: (ctx, index) {
             final title = model.items[index].title ?? "";
@@ -194,7 +194,8 @@ class _MainNewsPageState extends State<MainNewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:
-            // AppBar( back button style
+        // back button style
+            // AppBar(
             //   automaticallyImplyLeading: false,
             //   title: Row(
             //     mainAxisAlignment: MainAxisAlignment.start,
@@ -211,25 +212,27 @@ class _MainNewsPageState extends State<MainNewsPage> {
             // ),
 
             AppBar(
-          leading: ElevatedButton(
-            onPressed: () {
-              showGeneralDialog(
-                context: context,
-                pageBuilder: (context, anim1, anim2) {
-                  return AddNewsPage(
-                    onAddButtonDidClick: onAddNews,
-                  );
-                },
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return SlideTransition(
-                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
-                        .animate(anim1),
-                    child: child,
-                  );
-                },
-              );
-            },
-            child: Icon(Icons.add),
+              backgroundColor: Colors.amber,
+          // leading:buildRawMaterialButton(context),
+          leading:IconButton(
+              onPressed: () {
+                showGeneralDialog(
+                  context: context,
+                  pageBuilder: (context, anim1, anim2) {
+                    return AddNewsPage(
+                      onAddButtonDidClick: onAddNews,
+                    );
+                  },
+                  transitionBuilder: (context, anim1, anim2, child) {
+                    return SlideTransition(
+                      position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                          .animate(anim1),
+                      child: child,
+                    );
+                  },
+                );
+              },
+              icon: Icon(Icons.add,)
           ),
           actions: [
             Row(
@@ -260,6 +263,31 @@ class _MainNewsPageState extends State<MainNewsPage> {
                       builder: drawTable,
                     ),
         ));
+  }
+
+  RawMaterialButton buildRawMaterialButton(BuildContext context) {
+    return RawMaterialButton(
+            shape: CircleBorder(),
+            fillColor: Colors.white,
+            onPressed: () {
+              showGeneralDialog(
+                context: context,
+                pageBuilder: (context, anim1, anim2) {
+                  return AddNewsPage(
+                    onAddButtonDidClick: onAddNews,
+                  );
+                },
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return SlideTransition(
+                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                        .animate(anim1),
+                    child: child,
+                  );
+                },
+              );
+            },
+            child: Icon(Icons.add,)
+        );
   }
 }
 
