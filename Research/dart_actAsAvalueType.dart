@@ -5,24 +5,22 @@
 // int is a value type in the sense that if you pass int value into a function and change the value of a parameter inside function, it won't affect outer scope.
 // But int is still a class even though its name starts from lowercase letter
 
-
-
 // And regarding your concern about 'null' : In Dart, like JavaScript and Python, everything that a variable can hold is an object including null. Every object including null is an instance of some class and all these classes inherit from Object class.
 
 void main() {
 //   for (int i = 0; i < 10; i++) {
 //     print('hello ${i + 1}');
 //   }
-  
+
   int outer = 0;
   add(outer);
   print(outer); // 0, unchanged
-  
+
   String a = "JJ";
   addString(a);
   print(a);
 
-  print('2  is instance of "int" class :\t${ 2 is int}');
+  print('2  is instance of "int" class :\t${2 is int}');
 }
 
 void add(int inner) {

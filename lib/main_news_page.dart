@@ -119,7 +119,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
         //     crossAxisAlignment: CrossAxisAlignment.stretch,
         //     children: [
         //       ...new List<int>.generate(10, (i) => i + 1)
-        //           .map(
+        //           .map<Widget>(
         //             (number) => Container(
         //               child: Text(
         //                 "${number}",
@@ -151,7 +151,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
                 status: status,
                 category: category,
                 onDidClick: onTileDidClick,
-                color: isReorderEnabled ? Colors.amber : Colors.white);
+                color: isReorderEnabled ? Colors.amber : Colors.black);
           }
 
           // child: ListView.builder(
@@ -194,7 +194,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:
-        // back button style
+            // back button style
             // AppBar(
             //   automaticallyImplyLeading: false,
             //   title: Row(
@@ -212,9 +212,9 @@ class _MainNewsPageState extends State<MainNewsPage> {
             // ),
 
             AppBar(
-              backgroundColor: Colors.amber,
+          backgroundColor: Colors.amber,
           // leading:buildRawMaterialButton(context),
-          leading:IconButton(
+          leading: IconButton(
               onPressed: () {
                 showGeneralDialog(
                   context: context,
@@ -232,8 +232,9 @@ class _MainNewsPageState extends State<MainNewsPage> {
                   },
                 );
               },
-              icon: Icon(Icons.add,)
-          ),
+              icon: Icon(
+                Icons.add,
+              )),
           actions: [
             Row(
               children: [
@@ -267,27 +268,28 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
   RawMaterialButton buildRawMaterialButton(BuildContext context) {
     return RawMaterialButton(
-            shape: CircleBorder(),
-            fillColor: Colors.white,
-            onPressed: () {
-              showGeneralDialog(
-                context: context,
-                pageBuilder: (context, anim1, anim2) {
-                  return AddNewsPage(
-                    onAddButtonDidClick: onAddNews,
-                  );
-                },
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return SlideTransition(
-                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
-                        .animate(anim1),
-                    child: child,
-                  );
-                },
+        shape: CircleBorder(),
+        fillColor: Colors.white,
+        onPressed: () {
+          showGeneralDialog(
+            context: context,
+            pageBuilder: (context, anim1, anim2) {
+              return AddNewsPage(
+                onAddButtonDidClick: onAddNews,
               );
             },
-            child: Icon(Icons.add,)
-        );
+            transitionBuilder: (context, anim1, anim2, child) {
+              return SlideTransition(
+                position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                    .animate(anim1),
+                child: child,
+              );
+            },
+          );
+        },
+        child: Icon(
+          Icons.add,
+        ));
   }
 }
 
