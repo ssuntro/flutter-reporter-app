@@ -31,3 +31,5 @@ void addString(String inner) {
   inner += " ee";
 }
 
+
+// in short, this is what dart dev need to be aware. However, mem leak issue still avaiable as typical ref type in other programming lang

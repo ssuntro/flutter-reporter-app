@@ -55,8 +55,8 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
   @override
   void initState() {
-    _onScreenFirstBuild =
-        Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
+    _onScreenFirstBuild = Provider.of<NewsListProvider>(context, listen: false)
+        .fetchFromNetwork();
     super.initState();
   }
 
@@ -66,7 +66,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
     //   newsList = newValue;
     // });
 
-    Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
+    Provider.of<NewsListProvider>(context, listen: false).fetchFromNetwork();
   }
 
   onReorder(int oldIndex, int newIndex) {
@@ -74,25 +74,26 @@ class _MainNewsPageState extends State<MainNewsPage> {
       return;
     }
 
-    Provider.of<NewsList>(context, listen: false).reorder(oldIndex, newIndex);
+    Provider.of<NewsListProvider>(context, listen: false)
+        .reorder(oldIndex, newIndex);
   }
 
   onRefreshButtonDidClick() {
     // setState(() {
     //   newsList = stubData();
     // });
-    Provider.of<NewsList>(context, listen: false).fetchFromNetwork();
+    Provider.of<NewsListProvider>(context, listen: false).fetchFromNetwork();
   }
 
   onAddNews(News aNews) {
     // setState(() {
     //   newsList.add(aNews);
     // });
-    Provider.of<NewsList>(context, listen: false).addItem(aNews);
+    Provider.of<NewsListProvider>(context, listen: false).addItem(aNews);
   }
 
   onTileDidClick(String title) {
-    final selectedNews = Provider.of<NewsList>(context, listen: false)
+    final selectedNews = Provider.of<NewsListProvider>(context, listen: false)
         .items
         .firstWhere((elem) => elem.title == title);
     Navigator.of(context).pushNamed(NewsPage.routeName,
@@ -100,7 +101,8 @@ class _MainNewsPageState extends State<MainNewsPage> {
   }
 
   onRemove(String title) {
-    Provider.of<NewsList>(context, listen: false).removeItemFor(title: title);
+    Provider.of<NewsListProvider>(context, listen: false)
+        .removeItemFor(title: title);
     // final index = Provider.of<NewsList>(context, listen: false)
     //     .items
     //     .indexWhere((elem) => elem.title == title);
@@ -109,7 +111,8 @@ class _MainNewsPageState extends State<MainNewsPage> {
     // });
   }
 
-  Widget drawTable(BuildContext context, NewsList model, Widget? child) {
+  Widget drawTable(
+      BuildContext context, NewsListProvider model, Widget? child) {
     return Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -259,7 +262,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
           builder: (ctx, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
                   ? Center(child: CircularProgressIndicator())
-                  : Consumer<NewsList>(
+                  : Consumer<NewsListProvider>(
                       child: null,
                       builder: drawTable,
                     ),
@@ -325,7 +328,7 @@ class _MainNewsPageState extends State<MainNewsPage> {
 //           onPressed: () {},
 //           style: ElevatedButton.styleFrom(
 //             primary: Color.fromARGB(255, 198, 126, 210),
-//             onPrimary: Color.fromARGB(255, 108, 8, 125),
+//             onPrimary/bg color: Color.fromARGB(255, 108, 8, 125),
 //             textStyle: TextStyle(
 //                 fontSize: 15,
 //                 fontWeight: FontWeight.normal),

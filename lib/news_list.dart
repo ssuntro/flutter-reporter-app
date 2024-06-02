@@ -9,7 +9,7 @@ import 'news_category.dart';
 import 'news_status.dart';
 
 //* ~store
-class NewsList with ChangeNotifier {
+class NewsListProvider with ChangeNotifier {
   List<News> _items = [];
 
   List<News> get items {

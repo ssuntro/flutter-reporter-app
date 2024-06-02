@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-        value: NewsList(),
+        value: NewsListProvider(),
         child: MaterialApp(
           routes: {
             MainNewsPage.routeName: (ctx) => MainNewsPage(),
@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: SplashPage(title: 'News App',),
+          home: SplashPage(
+            title: 'News App',
+          ),
         ));
   }
 }
