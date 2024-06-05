@@ -70,7 +70,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           );
   }
 
-  Widget buildLottie() {
+  StatefulWidget buildLottie() {
     print("buildLottie has been called");
     return Lottie.asset('assets/dino.json', controller: _controller,
         onLoaded: (composition) {
