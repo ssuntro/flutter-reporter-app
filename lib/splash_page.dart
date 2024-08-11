@@ -95,6 +95,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           buildLottie(),
           buildButton(),
           AStatelessWidget(
+            key: Key('datetimeText'),
             parsedString: DateTime.now().toString(),
           ),
           AStatefulWidget(

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class AStatelessWidget extends StatelessWidget with WidgetsBindingObserver {
   final String parsedString;
 
-  AStatelessWidget({required this.parsedString}) {
+  AStatelessWidget({
+    required this.parsedString,
+    super.key,
+  }) {
     print("AStatelessWidget is init");
     WidgetsBinding.instance.addObserver(this);
   }
