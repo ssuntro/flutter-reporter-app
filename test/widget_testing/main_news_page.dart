@@ -28,7 +28,7 @@ void main() {
     expect(find.text('Add news'), findsOneWidget);
   });
 
-  //TODO: need to fix this test by mocking the NewsListProvider or network layer
+  // //TODO: need to fix this test by mocking the NewsListProvider or network layer
   // testWidgets('navigate to News page', (WidgetTester tester) async {
   //   // Build the SplashPage
   //   await tester.pumpWidget(
@@ -43,13 +43,19 @@ void main() {
   //   // Ensure initState has been called and the widget is updated
   //   await tester.pumpAndSettle(Duration(seconds: 1));
 
+  //   //Remember title of first news
+  //   final firstItem = find.byType(NewsTile).first;
+  //   final newsTitle = tester.widget<NewsTile>(firstItem).title;
+
   //   // Tap on the first news item
   //   await tester.tap(find.byType(NewsTile).first);
   //   await tester.pumpAndSettle();
 
-  //   // Verify that the News page is displayed
-  //   final element = find.byKey(Key('news-title'));
-  //   expect(element, findsOneWidget);
+  //   // Verify that the News page is displayed with correct title
+  //   final textFinder = find.byKey(Key('news-title'));
+  //   expect(textFinder, findsOneWidget);
+  //   final Text textWidget = tester.widget(textFinder);
+  //   expect(textWidget.data, newsTitle);
   // });
 
   testWidgets('Wait until first item of NewsTile is present',
