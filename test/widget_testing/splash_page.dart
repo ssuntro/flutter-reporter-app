@@ -20,8 +20,7 @@ void main() {
     );
 
     // Get the display string from an element with a specific key.
-    final key = Key('datetimeText');
-    final element = find.byKey(key);
+    final element = find.byKey(Key('datetimeText'));
     expect(element, findsOneWidget);
 
     final textWidget = tester.widget<AStatelessWidget>(element);

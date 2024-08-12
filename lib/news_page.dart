@@ -113,6 +113,7 @@ class _NewsPageState extends State<NewsPage> {
                   children: [
                     Flexible(
                         child: Text(
+                      key: Key('news-title'),
                       model?.title ?? "",
                       softWrap: true,
                       style: TextStyle(fontSize: 18),
