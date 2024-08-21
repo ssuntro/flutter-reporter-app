@@ -36,8 +36,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  golden_toolkit: ^0.15.0
   integration_test:
     sdk: flutter
+  mockito: ^5.4.4
 
 flutter:
   uses-material-design: true
