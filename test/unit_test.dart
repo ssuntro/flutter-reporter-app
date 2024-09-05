@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import '../business_logic/calculator.dart';
 
-//NOTE: Spike: flutter_test without mockito, this file is for only spike purpose, . It is not a good practice to use this file in production code.
+//NOTE: Spike: flutter_test without mockito. This file is for only spike purpose which is not a good practice to use this file in production code.
 
 class MockCalculator implements Calculator {
   @override
