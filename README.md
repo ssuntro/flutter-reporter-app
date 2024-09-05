@@ -18,5 +18,4 @@ This project contains difference lv of testings such as unit testing, widget tes
 flutter_test • Mockito • Build runner
 
 ##### How to generate mock file automatically with Mockito?
-`dart run build_runner build`
-
+`dart run build_runner build`. For more info please visit [here](https://pub.dev/packages/mockito)
