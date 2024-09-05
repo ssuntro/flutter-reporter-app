@@ -12,8 +12,11 @@ Tools • Dart 3.4.0 • DevTools 2.34.3
 `flutter pub get`
 
 ## Testing
+This project contains difference lv of testings such as unit testing, widget testing, integration testing, etc.
 
 ### Unit testing
+flutter_test • Mockito • Build runner
 
-##### How ro generate mock file with mockito?
+##### How to generate mock file automatically with Mockito?
 `dart run build_runner build`
+
