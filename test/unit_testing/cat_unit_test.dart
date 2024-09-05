@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 import 'cat_unit_test.mocks.dart'; //path will have a same name of file that @GenerateNiceMocks annotation located
 
 class Cat {
-  String sound() => "Meow";
+  String sound(String suffix) => "Meow$suffix";
   bool eatFood(String food, {bool? hungry}) {
     return false;
   }
@@ -25,9 +25,9 @@ void main() {
   test('cat sound', () {
     var cat = MockCat();
 
-    when(cat.sound()).thenReturn("Purr");
-    expect(cat.sound(), "Purr");
-    expect(cat.sound(), "Purr");
+    when(cat.sound(any)).thenReturn("Purr");
+    expect(cat.sound(""), "Purr");
+    expect(cat.sound("ddd"), "Purr");
   });
 
   group('eat food', () {
