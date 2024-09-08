@@ -6,6 +6,7 @@ import 'package:news_app/news_list.dart';
 import 'package:news_app/news_status.dart';
 import 'package:news_app/news_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 
 //NOTE: Widget testing in Flutter is a form of UI + white-box testing rather than unit testing. It typically provides slower feedback and requires significant effort to create and maintain.
 void main() {
@@ -80,5 +81,18 @@ void main() {
 
     // Verify the first NewsTile is present
     expect(find.text('News 1'), findsOneWidget);
+  });
+
+  testGoldens('MyWidget golden test', (WidgetTester tester) async {
+    // await tester.pumpWidgetBuilder(MainNewsPage());
+    await tester.pumpWidgetBuilder(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => NewsListProvider()),
+        ],
+        child: MaterialApp(home: MainNewsPage()),
+      ),
+    );
+    await screenMatchesGolden(tester, 'my_widget_golden');
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:news_app/a_stateless_widget.dart';
 import 'package:news_app/main_news_page.dart';
 import 'package:news_app/news_list.dart';
