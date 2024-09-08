@@ -8,17 +8,29 @@ import 'package:news_app/splash_page.dart';
 import 'package:provider/provider.dart';
 
 //NOTE: Widget testing in Flutter is a form of UI + white-box testing rather than unit testing. It typically provides slower feedback and requires significant effort to create and maintain.
+
+class MockNewsListProvider extends Mock implements NewsListProvider {}
+
+extension AAA on SplashPage {
+  Widget wrapWithMaterial() => MaterialApp(
+          home: Provider<NewsListProvider>(
+        create: (_) => MockNewsListProvider(),
+        child: MaterialApp(home: this),
+      ));
+}
+
 void main() {
   testWidgets('date time labels are shown', (WidgetTester tester) async {
     // Build the SplashPage widget wrapped with the Provider.
-    await tester.pumpWidget(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => NewsListProvider()),
-        ],
-        child: MaterialApp(home: SplashPage(title: '')),
-      ),
-    );
+    // await tester.pumpWidget(
+    //   MultiProvider(
+    //     providers: [
+    //       ChangeNotifierProvider(create: (_) => NewsListProvider()),
+    //     ],
+    //     child: MaterialApp(home: SplashPage(title: '')),
+    //   ),
+    // );
+    await tester.pumpWidget(SplashPage(title: '').wrapWithMaterial());
 
     // Get the display string from an element with a specific key.
     final element = find.byKey(Key('datetimeText'));
