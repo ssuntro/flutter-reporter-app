@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             // AddNewsPage.routeName: (ctx) => AddNewsPage(),
             NewsPage.routeName: (ctx) => NewsPage(),
           },
-          title: 'Flutter Demo',
+          title: 'Flutter Demo Demo',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
