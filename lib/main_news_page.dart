@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/login_with_pin.dart';
 import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
 import 'package:news_app/news_list.dart';
@@ -76,13 +77,6 @@ class _MainNewsPageState extends State<MainNewsPage> {
 
     Provider.of<NewsListProvider>(context, listen: false)
         .reorder(oldIndex, newIndex);
-  }
-
-  onRefreshButtonDidClick() {
-    // setState(() {
-    //   newsList = stubData();
-    // });
-    Provider.of<NewsListProvider>(context, listen: false).fetchFromNetwork();
   }
 
   onAddNews(News aNews) {
@@ -250,8 +244,10 @@ class _MainNewsPageState extends State<MainNewsPage> {
                   child: Text("Reorder"),
                 ),
                 ElevatedButton(
-                  onPressed: onRefreshButtonDidClick,
-                  child: Text("Refresh"),
+                  onPressed: () => {
+                    Navigator.of(context).pushNamed(LoginWithPinPage.routeName)
+                  },
+                  child: Text("Login with PIN"),
                 )
               ],
             ),
