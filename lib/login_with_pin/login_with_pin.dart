@@ -17,13 +17,13 @@ class LoginWithPinPage extends StatefulWidget {
 }
 
 class _LoginWithPinPageState extends State<LoginWithPinPage> {
-  var numberOfInputtedDigits = 0;
+  var inputtedPin = "";
 
   Widget createCircle(int index) {
     return Container(
       width: 15.0,
       height: 15.0,
-      decoration: index <= numberOfInputtedDigits
+      decoration: index <= inputtedPin.length
           ? BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.orange,
@@ -40,6 +40,7 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("inputtedPin: ${inputtedPin}");
     return Scaffold(
       appBar: AppBar(
         title: Text('Login with PIN'),
@@ -79,8 +80,10 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
                       icon: Icon(Icons.backspace),
                       onPressed: () {
                         setState(() {
-                          if (numberOfInputtedDigits > 0) {
-                            numberOfInputtedDigits--;
+                          if (inputtedPin.length > 0) {
+                            //TODO: integration test bug to demo ได้นะ
+                            inputtedPin = inputtedPin.substring(
+                                0, inputtedPin.length - 1);
                           }
                         });
                       },
@@ -89,13 +92,14 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
                   return InkWell(
                     onTap: () {
                       setState(() {
-                        if (numberOfInputtedDigits < 6) {
-                          numberOfInputtedDigits++;
+                        if (inputtedPin.length < 6) {
+                          //TODO: integration test bug to demo ได้นะ
+                          inputtedPin +=
+                              widget.KeyPadsortOrder.getDisplayNumber(index)
+                                  .toString();
                         }
                       });
-                      print(
-                          'Pressed ${widget.KeyPadsortOrder.getDisplayNumber(index)}');
-                      // Add your onPress logic here
+                      // print('Pressed ${widget.KeyPadsortOrder.getDisplayNumber(index)}');
                     },
                     child: Container(
                       alignment: Alignment.center,
