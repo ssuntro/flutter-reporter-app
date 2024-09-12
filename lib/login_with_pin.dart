@@ -1,8 +1,30 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+enum SortOrder {
+  ascending,
+  descending,
+}
+
+extension SortOrderExtension on SortOrder {
+  int getDisplayNumber(int index) {
+    switch (this) {
+      case SortOrder.ascending:
+        return index;
+      case SortOrder.descending:
+        return 9 - index;
+      default:
+        return index;
+    }
+  }
+}
+
 class LoginWithPinPage extends StatelessWidget {
   static const routeName = 'login-with-pin-page';
+
+  final SortOrder KeyPadsortOrder;
 
   Widget createDircle() {
     return Container(
@@ -17,16 +39,14 @@ class LoginWithPinPage extends StatelessWidget {
 
   late final List<Widget> xx;
 
-  LoginWithPinPage() {
+  LoginWithPinPage()
+      : KeyPadsortOrder =
+            Random().nextBool() ? SortOrder.ascending : SortOrder.descending {
     xx = <Widget>[
       createDircle(),
-      SizedBox(width: 15.0),
       createDircle(),
-      SizedBox(width: 15.0),
       createDircle(),
-      SizedBox(width: 15.0),
       createDircle(),
-      SizedBox(width: 15.0),
       createDircle(),
     ];
   }
@@ -39,42 +59,47 @@ class LoginWithPinPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Text('Login with PIN'),
-            Row(
-              children: xx, mainAxisAlignment: MainAxisAlignment.spaceAround,
-              // <Widget>[
-              // ...new List<int>.generate(5, (i) => i + 1)
-              //     .map((number) => Container(
-              //           width: 15.0,
-              //           height: 15.0,
-              //           decoration: new BoxDecoration(
-              //             color: Colors.orange,
-              //             shape: BoxShape.circle,
-              //           ),
-              //         ))
-              //     .toList()
-              // ],
+            Icon(
+              Icons.add,
+              size: 50.0,
+              color: Colors.green,
             ),
+            SizedBox(height: 50.0),
+            Row(
+              children: xx,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            ),
+            SizedBox(height: 50.0),
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // 3 columns
+                  crossAxisCount: 3,
                   mainAxisSpacing: 10.0,
                   crossAxisSpacing: 10.0,
                 ),
-                itemCount: 10, // 0-9
+                itemCount: 11,
                 itemBuilder: (context, index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    // decoration: BoxDecoration(
-                    //   color: Colors.orange,
-                    // shape: BoxShape.circle,
-                    // ),
-                    child: Text(
-                      '${9 - index}',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.black,
+                  if (index == 10) {
+                    // Last item, render delete button
+                    return IconButton(
+                      icon: Icon(Icons.backspace),
+                      onPressed: () {},
+                    );
+                  }
+                  return InkWell(
+                    onTap: () {
+                      print(
+                          'Pressed ${KeyPadsortOrder.getDisplayNumber(index)}');
+                      // Add your onPress logic here
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${KeyPadsortOrder.getDisplayNumber(index)}',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   );
