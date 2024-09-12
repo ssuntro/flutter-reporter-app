@@ -1,38 +1,45 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:news_app/login_with_pin/sort_order.dart';
 
-class LoginWithPinPage extends StatelessWidget {
+class LoginWithPinPage extends StatefulWidget {
   static const routeName = 'login-with-pin-page';
 
   final SortOrder KeyPadsortOrder;
 
-  Widget createDircle() {
+  LoginWithPinPage()
+      : KeyPadsortOrder =
+            Random().nextBool() ? SortOrder.ascending : SortOrder.descending {}
+
+  @override
+  State<LoginWithPinPage> createState() => _LoginWithPinPageState();
+}
+
+class _LoginWithPinPageState extends State<LoginWithPinPage> {
+  var numberOfInputtedDigits = 0;
+
+  Widget createCircle(int index) {
     return Container(
       width: 15.0,
       height: 15.0,
-      decoration: new BoxDecoration(
-        color: Colors.orange,
-        shape: BoxShape.circle,
-      ),
+      decoration: index <= numberOfInputtedDigits
+          ? BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.orange,
+            )
+          : BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.orange,
+                width: 2.0,
+              ),
+            ),
     );
   }
 
   late final List<Widget> xx;
 
-  LoginWithPinPage()
-      : KeyPadsortOrder =
-            Random().nextBool() ? SortOrder.ascending : SortOrder.descending {
-    xx = <Widget>[
-      createDircle(),
-      createDircle(),
-      createDircle(),
-      createDircle(),
-      createDircle(),
-    ];
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +56,13 @@ class LoginWithPinPage extends StatelessWidget {
             ),
             SizedBox(height: 50.0),
             Row(
-              children: xx,
+              children: [
+                ...new List<int>.generate(6, (i) => i + 1)
+                    .map<Widget>(
+                      (number) => createCircle(number),
+                    )
+                    .toList()
+              ],
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             ),
             SizedBox(height: 50.0),
@@ -72,13 +85,13 @@ class LoginWithPinPage extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       print(
-                          'Pressed ${KeyPadsortOrder.getDisplayNumber(index)}');
+                          'Pressed ${widget.KeyPadsortOrder.getDisplayNumber(index)}');
                       // Add your onPress logic here
                     },
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        '${KeyPadsortOrder.getDisplayNumber(index)}',
+                        '${widget.KeyPadsortOrder.getDisplayNumber(index)}',
                         style: TextStyle(
                           fontSize: 24.0,
                           color: Colors.black,
