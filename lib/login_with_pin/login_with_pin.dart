@@ -38,8 +38,6 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
     );
   }
 
-  late final List<Widget> xx;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,11 +77,22 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
                     // Last item, render delete button
                     return IconButton(
                       icon: Icon(Icons.backspace),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (numberOfInputtedDigits > 0) {
+                            numberOfInputtedDigits--;
+                          }
+                        });
+                      },
                     );
                   }
                   return InkWell(
                     onTap: () {
+                      setState(() {
+                        if (numberOfInputtedDigits < 6) {
+                          numberOfInputtedDigits++;
+                        }
+                      });
                       print(
                           'Pressed ${widget.KeyPadsortOrder.getDisplayNumber(index)}');
                       // Add your onPress logic here
