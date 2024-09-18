@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/login_with_pin/pin_page.dart';
 import 'package:news_app/login_with_pin/pin_page_no_tdd.dart';
 import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
@@ -244,9 +245,8 @@ class _MainNewsPageState extends State<MainNewsPage> {
                   child: Text("Reorder"),
                 ),
                 ElevatedButton(
-                  onPressed: () => {
-                    Navigator.of(context).pushNamed(LoginWithPinPage.routeName)
-                  },
+                  onPressed: () =>
+                      {Navigator.of(context).pushNamed(PinPage.routeName)},
                   child: Text("Login with PIN"),
                 )
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/login_with_pin/pin_page.dart';
 import 'package:news_app/login_with_pin/pin_page_no_tdd.dart';
 import 'package:news_app/main_news_page.dart';
 import 'package:news_app/news_list.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
             // AddNewsPage.routeName: (ctx) => AddNewsPage(),
             NewsPage.routeName: (ctx) => NewsPage(),
             LoginWithPinPage.routeName: (ctx) => LoginWithPinPage(),
+            PinPage.routeName: (ctx) => PinPage(),
           },
           title: 'Flutter Demo',
           theme: ThemeData(
