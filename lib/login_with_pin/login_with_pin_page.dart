@@ -6,7 +6,7 @@ import 'pin_view_model.dart';
 
 //MVVM with ChangeNotifierProvider
 //the alternative of mvvm is delegation pattern with mixin https://betterprogramming.pub/how-to-implement-the-delegation-design-pattern-in-dart-d782de77c886
-class PinPage extends StatelessWidget {
+class LoginWithPinPage extends StatelessWidget {
   static const routeName = 'pin-page';
   @override
   Widget build(BuildContext context) {
