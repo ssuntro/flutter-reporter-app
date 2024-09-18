@@ -8,6 +8,7 @@ class LoginWithPinPage extends StatefulWidget {
   static const routeName = 'login-with-pin-page';
 
   final SortOrder KeyPadsortOrder;
+  final util = PinUtils();
 
   LoginWithPinPage()
       : KeyPadsortOrder =
@@ -19,7 +20,7 @@ class LoginWithPinPage extends StatefulWidget {
 
 class _LoginWithPinPageState extends State<LoginWithPinPage> {
   var inputtedPin = "";
-  final util = PinUtils();
+  var isLoading = false;
 
   Widget createCircle(int index) {
     return Container(
@@ -43,6 +44,7 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
   @override
   Widget build(BuildContext context) {
     print("inputtedPin: ${inputtedPin}");
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Login with PIN'),
@@ -67,39 +69,61 @@ class _LoginWithPinPageState extends State<LoginWithPinPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             ),
             SizedBox(height: 50.0),
-            CircularProgressIndicator(
-              color: Colors.orange,
-            ),
-            Expanded(
-              child: PinGridView(
-                sortOrder: widget.KeyPadsortOrder,
-                deleteButtonOnPressed: () {
-                  setState(() {
-                    if (inputtedPin.length > 0) {
-                      //TODO: integration test bug to demo ได้นะ
-                      inputtedPin =
-                          inputtedPin.substring(0, inputtedPin.length - 1);
-                    }
-                  });
-                },
-                numberButtonOnPressed: (aNumber) {
-                  setState(() {
-                    if (inputtedPin.length < 6) {
-                      //TODO: integration test bug to demo ได้นะ
-                      inputtedPin += aNumber.toString();
-                    }
-                    if (inputtedPin.length == 6 &&
-                        util.validatePin(inputtedPin)) {
-                      util.savePin(inputtedPin);
-                    }
-                  });
-                },
-              ),
-            ),
+            isLoading
+                ? CircularProgressIndicator(
+                    color: Colors.orange,
+                  )
+                : Expanded(
+                    child: PinGridView(
+                        sortOrder: widget.KeyPadsortOrder,
+                        deleteButtonOnPressed: _onDeleteButtonPressed,
+                        numberButtonOnPressed: _onDigitPressed),
+                  ),
           ],
         ),
       ),
     );
+  }
+
+  void _onDeleteButtonPressed() {
+    setState(() {
+      if (inputtedPin.length > 0) {
+        //TODO: integration test bug to demo ได้นะ
+        inputtedPin = inputtedPin.substring(0, inputtedPin.length - 1);
+      }
+    });
+  }
+
+  void _onDigitPressed(int digit) {
+    final newPin = inputtedPin + digit.toString();
+    //TODO: hidden bug - expect to be detected by unit testing if do TDD which will drive to mvvm. Can be detected by component testing if !TDD
+    //final newPin = digit.toString() + inputtedPin;
+    if (inputtedPin.length < 6) {
+      //TODO: integration test bug to demo ได้นะ
+
+      setState(() {
+        inputtedPin = newPin;
+      });
+    }
+    if (newPin.length == 6 && widget.util.validatePin(newPin)) {
+      _submitPin(newPin);
+    }
+
+    //TO-FIX: update all var and call empty setState() or
+    //save new inputtedPin in temp var and check == 6
+  }
+
+  void _submitPin(String pin) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(Duration(seconds: 4));
+    // var a = await util.savePin(pin);
+
+    setState(() {
+      isLoading = false;
+    });
   }
 }
 

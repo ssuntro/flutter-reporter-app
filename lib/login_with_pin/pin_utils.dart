@@ -3,5 +3,10 @@ class PinUtils {
     return true;
   }
 
-  void savePin(String inputtedPin) {}
+  Future<bool> submitPin(String pin) {
+    return Future.delayed(Duration(seconds: 2), () {
+      print("Pin saved: $pin");
+      return true;
+    });
+  }
 }
