@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/login_with_pin/login_with_pin_page_no_tdd.dart';
+import 'package:news_app/login_with_pin/pin_page_no_tdd.dart';
 import 'package:news_app/news.dart';
 import 'package:news_app/news_category.dart';
 import 'package:news_app/news_list.dart';
